@@ -365,13 +365,13 @@ function computeScores(feature, wH) {
   const pr = feature.properties;
 
   // Hazard components (assumed already in [0,1])
-  const flood = Number(pr.FloodSus_m);
-  const drou  = Number(pr.DrouSus_m);
-  const fire  = Number(pr.FireSus_m);
+  const flood = Number(pr.FloodSus_m ?? pr.FloodSus ?? pr.flood ?? 0);
+  const drou  = Number(pr.DrouSus_m  ?? pr.DrouSus  ?? pr.drou  ?? 0);
+  const fire  = Number(pr.FireSus_m  ?? pr.FireSus  ?? pr.fire  ?? 0);
   const H = 0.55*flood + 0.35*drou + 0.10*fire;
 
   // Socio index S is precomputed in the GeoJSON as SocioIndex
-  const S = Number(pr.SocioIndex);
+  const S = Number(pr.SocioIndex ?? pr.SocioeconomicIndex ?? pr.S ?? 0);
   const V = 1 - S;
 
   const priority = 100 * (wH*H + (1-wH)*V);
@@ -637,24 +637,59 @@ async function load() {
     const resp = await fetch(DATA_URL, {cache:'no-cache'});
     if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
     const data = await resp.json();
-    // data can be either a GeoJSON FeatureCollection or an array of city objects
+    
+    /**
+     * Normalize EVERYTHING into GeoJSON-like Features:
+     * cities = [{ properties: {...}, geometry: { coordinates:[lon,lat] } }, ...]
+     */
     if (Array.isArray(data)) {
-      cities = data;
-    } else {
-      cities = (data && data.features) ? data.features.map(ft => {
+      // cities.json: array of flat objects with lat/lon + attributes
+      cities = data.map((obj, i) => {
+        const lon = Number(obj.lon ?? obj.LON ?? obj.longitude ?? obj.Longitude);
+        const lat = Number(obj.lat ?? obj.LAT ?? obj.latitude ?? obj.Latitude);
+    
+        return {
+          type: 'Feature',
+          properties: {
+            ...obj,
+            // ensure CITY_ID exists (used for selection persistence)
+            CITY_ID: obj.CITY_ID ?? obj.city_id ?? obj.ADM2_NAME ?? `city_${i}`
+          },
+          geometry: {
+            type: 'Point',
+            coordinates: [lon, lat]
+          }
+        };
+      }).filter(f => Number.isFinite(f.geometry.coordinates[0]) && Number.isFinite(f.geometry.coordinates[1]));
+    
+    } else if (data && Array.isArray(data.features)) {
+      // GeoJSON FeatureCollection
+      cities = data.features.map((ft, i) => {
         const p = ft.properties || {};
-        const c = ft.geometry && ft.geometry.coordinates ? ft.geometry.coordinates : [null, null];
-        return Object.assign({}, p, {lon: c[0], lat: c[1]});
-      }) : [];
+        const c = ft.geometry && ft.geometry.coordinates ? ft.geometry.coordinates : [NaN, NaN];
+        return {
+          type: 'Feature',
+          properties: {
+            ...p,
+            CITY_ID: p.CITY_ID ?? p.city_id ?? p.ADM2_NAME ?? `city_${i}`
+          },
+          geometry: {
+            type: 'Point',
+            coordinates: [Number(c[0]), Number(c[1])]
+          }
+        };
+      }).filter(f => Number.isFinite(f.geometry.coordinates[0]) && Number.isFinite(f.geometry.coordinates[1]));
+    
+    } else {
+      cities = [];
     }
-
     populateFilters();
     applyFilters();
 
     setStatus('Loaded. Use filters to explore.');
   } catch (e) {
     console.error(e);
-    setStatus('Error loading data. Make sure cities_points.geojson is in the same folder as index.html.');
+    setStatus('Error loading data. Make sure cities.json is in the same folder as index.html (or update DATA_URL).');
   }
 }
 
