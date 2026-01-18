@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-  <!-- Plotly (tiny charts in the sidebar) -->
+  <!-- Plotly (sidebar chart) -->
   <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
 
   <style>
@@ -19,7 +19,12 @@
       --muted: #6b6b6b;
       --border: #dddddd;
       --panel-bg: #f8f8f8;
-      --font-main: "Palatino Linotype", "Book Antiqua", Palatino, "Times New Roman", serif;
+      --panel-bg-2: #fbfbfb;
+      --warn: #8a6d3b;
+      --warn-bg: #fcf8e3;
+      --ok-bg: #f0fff4;
+      --ok: #2f855a;
+      --font-main: "Palatino Linotype","Book Antiqua",Palatino,"Times New Roman",serif;
     }
 
     * { box-sizing: border-box; }
@@ -32,90 +37,109 @@
       color: var(--fg);
     }
 
-    .page-header {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 1rem;
-      margin-bottom: 0.75rem;
-    }
-
-    h1 { font-size: 1.6rem; margin: 0; }
+    .page-header { margin-bottom: 0.75rem; }
+    h1 { font-size: 1.65rem; margin: 0; }
 
     .subtitle {
-      margin: 0.25rem 0 0 0;
-      font-size: 0.92rem;
+      margin: 0.35rem 0 0 0;
+      font-size: 0.94rem;
       color: var(--muted);
-      line-height: 1.25;
-      max-width: 900px;
-    }
-
-    .controls {
-      display: grid;
-      grid-template-columns: repeat(6, minmax(160px, 1fr));
-      gap: 0.75rem;
-      padding: 0.9rem;
-      margin: 0.75rem 0 0.9rem 0;
-      background: var(--panel-bg);
-      border-radius: 0.75rem;
-      border: 1px solid var(--border);
-    }
-
-    .control-group { display: flex; flex-direction: column; gap: 0.25rem; }
-
-    .control-group label {
-      font-size: 0.82rem;
-      color: var(--muted);
-    }
-
-    select, input[type="number"], input[type="range"] {
-      padding: 0.35rem 0.5rem;
-      border-radius: 0.5rem;
-      border: 1px solid var(--border);
-      font-size: 0.9rem;
-      background: #fff;
-    }
-
-    .range-row {
-      display: grid;
-      grid-template-columns: 1fr 62px;
-      gap: 0.5rem;
-      align-items: center;
+      line-height: 1.3;
+      max-width: 980px;
     }
 
     .pill {
       display: inline-block;
-      padding: 0.15rem 0.5rem;
+      padding: 0.12rem 0.5rem;
       border-radius: 999px;
       border: 1px solid var(--border);
-      font-size: 0.8rem;
+      font-size: 0.82rem;
       color: #333;
       background: #fff;
       white-space: nowrap;
     }
 
+    .banner {
+      margin: 0.75rem 0 0.6rem 0;
+      padding: 0.7rem 0.85rem;
+      border-radius: 0.75rem;
+      border: 1px solid var(--border);
+      background: var(--panel-bg);
+      color: #333;
+      line-height: 1.35;
+      font-size: 0.9rem;
+    }
+
+    .banner.warn {
+      background: var(--warn-bg);
+      border-color: #f2e6b6;
+      color: var(--warn);
+    }
+
+    .banner.ok {
+      background: var(--ok-bg);
+      border-color: #c6f6d5;
+      color: var(--ok);
+    }
+
+    .controls {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(170px, 1fr));
+      gap: 0.75rem;
+      padding: 0.9rem;
+      margin: 0.8rem 0 0.9rem 0;
+      background: var(--panel-bg);
+      border-radius: 0.85rem;
+      border: 1px solid var(--border);
+    }
+
+    .control-group { display: flex; flex-direction: column; gap: 0.25rem; }
+    .control-group label { font-size: 0.82rem; color: var(--muted); }
+
+    select, input[type="number"], input[type="range"], input[type="checkbox"] {
+      padding: 0.35rem 0.5rem;
+      border-radius: 0.55rem;
+      border: 1px solid var(--border);
+      font-size: 0.92rem;
+      background: #fff;
+    }
+
+    .range-row {
+      display: grid;
+      grid-template-columns: 1fr 70px;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    .toggle-row{
+      display:flex;
+      align-items:center;
+      gap:0.5rem;
+      padding-top:0.35rem;
+    }
+
     .layout {
       display: grid;
-      grid-template-columns: 1.4fr 0.9fr;
+      grid-template-columns: 1.45fr 0.95fr;
       gap: 0.9rem;
       align-items: start;
     }
 
     #map {
-      height: 610px;
-      border-radius: 0.75rem;
+      height: 630px;
+      border-radius: 0.85rem;
       border: 1px solid var(--border);
       overflow: hidden;
     }
 
     .side {
-      border-radius: 0.75rem;
+      border-radius: 0.85rem;
       border: 1px solid var(--border);
       background: #fff;
       padding: 0.85rem 0.85rem 1rem 0.85rem;
     }
 
-    .side h2 { margin: 0 0 0.4rem 0; font-size: 1.1rem; }
+    .side h2 { margin: 0 0 0.4rem 0; font-size: 1.15rem; }
 
     .muted { color: var(--muted); }
 
@@ -129,60 +153,84 @@
 
     .badge {
       font-weight: bold;
-      border-radius: 0.55rem;
-      padding: 0.2rem 0.55rem;
-      font-size: 0.82rem;
+      border-radius: 0.6rem;
+      padding: 0.22rem 0.6rem;
+      font-size: 0.84rem;
       border: 1px solid var(--border);
       background: #fff;
+      white-space: nowrap;
     }
-
-    .kv {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.35rem 0.75rem;
-      margin: 0.5rem 0 0.6rem 0;
-      font-size: 0.9rem;
-    }
-
-    .kv .k { color: var(--muted); font-size: 0.82rem; }
 
     .mini {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 0.4rem;
-      margin: 0.25rem 0 0.6rem 0;
+      gap: 0.45rem;
+      margin: 0.35rem 0 0.7rem 0;
     }
 
     .mini .box {
       border: 1px solid var(--border);
-      border-radius: 0.6rem;
-      padding: 0.45rem 0.55rem;
-      background: #fbfbfb;
+      border-radius: 0.65rem;
+      padding: 0.5rem 0.6rem;
+      background: var(--panel-bg-2);
     }
+    .mini .box .k { font-size: 0.76rem; color: var(--muted); }
+    .mini .box .v { font-size: 1.02rem; font-weight: 600; }
 
-    .mini .box .k { font-size: 0.75rem; color: var(--muted); }
-    .mini .box .v { font-size: 0.98rem; font-weight: 600; }
+    #bar { height: 200px; margin-top: 0.25rem; }
 
-    #bar {
-      height: 190px;
-      margin-top: 0.2rem;
+    .kv {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 0.35rem 0.75rem;
+      margin: 0.55rem 0 0.65rem 0;
+      font-size: 0.92rem;
     }
+    .kv .k { color: var(--muted); font-size: 0.82rem; }
 
     .status {
       margin-top: 0.5rem;
-      font-size: 0.85rem;
+      font-size: 0.86rem;
       color: var(--muted);
       line-height: 1.35;
+    }
+
+    details.weights {
+      margin-top: 0.85rem;
+      border-radius: 0.85rem;
+      border: 1px solid var(--border);
+      background: var(--panel-bg);
+      padding: 0.75rem 0.85rem;
+    }
+
+    details.weights summary {
+      cursor: pointer;
+      font-weight: 700;
+      margin-bottom: 0.55rem;
+    }
+
+    .weights-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(180px, 1fr));
+      gap: 0.75rem;
+      margin-top: 0.5rem;
+    }
+
+    .hint {
+      font-size: 0.86rem;
+      color: var(--muted);
+      margin: 0.2rem 0 0 0;
+      line-height: 1.3;
     }
 
     .about {
       margin-top: 1rem;
       padding: 1rem 1.2rem;
-      border-radius: 0.75rem;
+      border-radius: 0.85rem;
       border: 1px solid var(--border);
       background: var(--panel-bg);
       color: #444;
-      line-height: 1.45;
+      line-height: 1.5;
     }
 
     .about h3 { margin: 0 0 0.5rem 0; }
@@ -190,24 +238,24 @@
     @media (max-width: 1100px) {
       .controls { grid-template-columns: repeat(2, 1fr); }
       .layout { grid-template-columns: 1fr; }
-      #map { height: 520px; }
+      #map { height: 540px; }
+      .weights-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
-<body>
 
+<body>
   <div class="page-header">
-    <div>
-      <h1>South America City Priority Explorer</h1>
-      <p class="subtitle">
-        Planner-friendly triage view derived from city-level <span class="pill">Hazard (H)</span> and
-        <span class="pill">Adaptive Capacity (S)</span>.
-        We define <span class="pill">Vulnerability (V) = 1 − S</span> and compute
-        <span class="pill">Priority = 100 × (w<sub>H</sub>·H + (1−w<sub>H</sub>)·V)</span>.
-        Use filters to focus on a country/state or show the top <em>N</em> cities by population, imperviousness, or priority.
-      </p>
-    </div>
+    <h1>South America City Priority Explorer</h1>
+    <p class="subtitle">
+      Planner-friendly triage view derived from city-level <span class="pill">Hazard (H)</span> and
+      <span class="pill">Adaptive Capacity (S)</span>. We define <span class="pill">Vulnerability (V) = 1 − S</span> and compute
+      <span class="pill">Priority = 100 × (w<sub>H</sub>·H + (1−w<sub>H</sub>)·V)</span>.
+      Use filters to focus on a country/state or show the top <em>N</em> cities by population, imperviousness, or priority.
+    </p>
   </div>
+
+  <div id="banner" class="banner" style="display:none;"></div>
 
   <div class="controls">
     <div class="control-group">
@@ -236,24 +284,91 @@
       <label for="rankBy">Select top N by</label>
       <select id="rankBy">
         <option value="priority">Priority (default)</option>
-        <option value="TotPop">Total population</option>
-        <option value="Imperv_m">Impervious fraction</option>
+        <option value="totPop">Total population</option>
+        <option value="imperv">Impervious fraction</option>
       </select>
     </div>
 
     <div class="control-group">
       <label for="topN">N cities to display</label>
-      <input id="topN" type="number" min="10" max="500" step="10" value="100" />
+      <input id="topN" type="number" min="10" max="10000" step="50" value="500" />
+      <div class="hint">Note: showing &gt; 3000 points may be slower in some browsers.</div>
     </div>
 
     <div class="control-group">
-      <label>Hazard weight w<sub>H</sub></label>
+      <label>Hazard vs Vulnerability weight w<sub>H</sub></label>
       <div class="range-row">
-        <input id="wH" type="range" min="0.2" max="0.8" step="0.05" value="0.6" />
+        <input id="wH" type="range" min="0.0" max="1.0" step="0.05" value="0.6" />
         <div class="pill" id="wHLabel">0.60</div>
+      </div>
+      <div class="toggle-row">
+        <input id="autoNorm" type="checkbox" checked />
+        <label for="autoNorm" style="margin:0; font-size:0.82rem; color:var(--muted);">
+          Auto-normalize indices to [0,1] if needed
+        </label>
       </div>
     </div>
   </div>
+
+  <details class="weights">
+    <summary>Advanced: Edit weights (hazard composition and adaptive capacity)</summary>
+
+    <p class="hint">
+      If your hazard inputs are classified (e.g., 1–5) or in different ranges (e.g., 0–100),
+      keep <strong>Auto-normalize</strong> enabled so the tool rescales to [0,1] consistently.
+      Weight sliders are renormalized internally to sum to 1.
+    </p>
+
+    <div class="weights-grid">
+      <div class="control-group">
+        <label>Hazard weights: Flood (w<sub>F</sub>)</label>
+        <div class="range-row">
+          <input id="wFlood" type="range" min="0" max="1" step="0.01" value="0.55" />
+          <div class="pill" id="wFloodLabel">0.55</div>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label>Hazard weights: Drought (w<sub>D</sub>)</label>
+        <div class="range-row">
+          <input id="wDrou" type="range" min="0" max="1" step="0.01" value="0.35" />
+          <div class="pill" id="wDrouLabel">0.35</div>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label>Hazard weights: Fire (w<sub>R</sub>)</label>
+        <div class="range-row">
+          <input id="wFire" type="range" min="0" max="1" step="0.01" value="0.10" />
+          <div class="pill" id="wFireLabel">0.10</div>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label>Adaptive Capacity: GDP per cap weight (w<sub>GDP</sub>)</label>
+        <div class="range-row">
+          <input id="wGDP" type="range" min="0" max="1" step="0.01" value="0.40" />
+          <div class="pill" id="wGDPLabel">0.40</div>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label>Adaptive Capacity: HDI weight (w<sub>HDI</sub>)</label>
+        <div class="range-row">
+          <input id="wHDI" type="range" min="0" max="1" step="0.01" value="0.60" />
+          <div class="pill" id="wHDILabel">0.60</div>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label>&nbsp;</label>
+        <button id="resetWeights" style="padding:0.45rem 0.6rem;border-radius:0.6rem;border:1px solid var(--border);background:#fff;cursor:pointer;">
+          Reset to defaults
+        </button>
+        <div class="hint">Defaults: Flood 0.55, Drought 0.35, Fire 0.10; GDP 0.40, HDI 0.60.</div>
+      </div>
+    </div>
+  </details>
 
   <div class="layout">
     <div id="map"></div>
@@ -268,23 +383,21 @@
 
       <div class="mini">
         <div class="box">
-          <div class="k">Priority</div>
+          <div class="k">Priority (0–100)</div>
           <div class="v" id="priorityVal">—</div>
         </div>
         <div class="box">
-          <div class="k">Hazard (H)</div>
+          <div class="k">Hazard (H, 0–1)</div>
           <div class="v" id="hazVal">—</div>
         </div>
         <div class="box">
-          <div class="k">Vulnerability (1−S)</div>
+          <div class="k">Vulnerability (V, 0–1)</div>
           <div class="v" id="vulVal">—</div>
         </div>
       </div>
 
       <div id="bar"></div>
-
       <div class="kv" id="kv"></div>
-
       <div class="status" id="status">Loading cities…</div>
     </aside>
   </div>
@@ -292,24 +405,20 @@
   <div class="about">
     <h3>How to interpret this tool</h3>
     <ul>
-      <li><strong>Hazard (H)</strong> is a weighted composite: H = 0.55·FloodSus + 0.35·DrouSus + 0.10·FireSus.</li>
-      <li><strong>Adaptive Capacity (S)</strong> combines normalized per-capita GDP and HDI: S = 0.40·GDPpc<sub>norm</sub> + 0.60·HDI<sub>norm</sub>. Vulnerability is V = 1 − S.</li>
-      <li><strong>Priority</strong> blends hazard and vulnerability using the slider w<sub>H</sub>: Priority = 100·(w<sub>H</sub>·H + (1−w<sub>H</sub>)·V).</li>
-      <li><strong>Tiers</strong> are defined within the current filtered set using percentiles of Priority: Tier 1 ≥ P90, Tier 2: P75–P90, Tier 3: P50–P75, Tier 4 &lt; P50.</li>
+      <li><strong>Hazard (H)</strong> = w<sub>F</sub>·Flood + w<sub>D</sub>·Drought + w<sub>R</sub>·Fire (all normalized to 0–1).</li>
+      <li><strong>Adaptive Capacity (S)</strong> = w<sub>GDP</sub>·GDPpc + w<sub>HDI</sub>·HDI (both normalized to 0–1). Vulnerability is <strong>V = 1 − S</strong>.</li>
+      <li><strong>Priority</strong> = 100·(w<sub>H</sub>·H + (1−w<sub>H</sub>)·V). If w<sub>H</sub>=0.5, hazard and vulnerability are equally weighted.</li>
+      <li><strong>Tiers</strong> within the currently filtered set: Tier 1 ≥ P90, Tier 2: P75–P90, Tier 3: P50–P75, Tier 4 &lt; P50.</li>
       <li><strong>Map encoding:</strong> dot size ∝ population (log-scaled); dot color = Tier.</li>
     </ul>
-    <p class="muted">
-      Data source: city zonal statistics file exported from your workflow. This is a static page intended for GitHub Pages.
-    </p>
+    <p class="muted">Data source: your exported city zonal-statistics file (served as <code>cities.json</code>).</p>
   </div>
 
 <script>
-// ============================= CONFIG =====================================
-// If you prefer a lighter payload, use the provided cities.json (array of objects)
-// instead of the GeoJSON. Both can be generated from your shapefile.
-const DATA_URL = 'cities.json';
+/* ============================= CONFIG =================================== */
+const DATA_URL = './cities.json';
 
-// Tier colors (simple, high-contrast)
+/* Tier colors & labels (consistent ordering) */
 const TIER_STYLE = {
   1: { fill: '#d73027', stroke: '#111', label: 'Tier 1 (Immediate)' },
   2: { fill: '#fc8d59', stroke: '#111', label: 'Tier 2 (High)' },
@@ -318,13 +427,26 @@ const TIER_STYLE = {
   NA:{ fill: '#cccccc', stroke: '#111', label: '—' }
 };
 
-// ============================= STATE ======================================
-let cities = [];   // array of GeoJSON features
+/* ============================= STATE ==================================== */
+let cities = [];                 // normalized GeoJSON-like features
 let map, layerGroup;
 let currentMarkers = [];
 let lastSelectedId = null;
 
-// ============================= HELPERS ====================================
+/* Global min/max for normalization (computed after load) */
+let stats = {
+  flood: {min: NaN, max: NaN},
+  drou:  {min: NaN, max: NaN},
+  fire:  {min: NaN, max: NaN},
+  hdi:   {min: NaN, max: NaN},
+  gdp:   {min: NaN, max: NaN},
+  pop:   {min: NaN, max: NaN},
+  socio: {min: NaN, max: NaN}
+};
+
+/* ============================= HELPERS ================================== */
+function clamp(x, a, b){ return Math.max(a, Math.min(b, x)); }
+
 function fmt(x, d=2) {
   if (x === null || x === undefined || Number.isNaN(x)) return 'NA';
   return Number(x).toFixed(d);
@@ -335,17 +457,52 @@ function fmtInt(x) {
   return Math.round(Number(x)).toLocaleString('en-US');
 }
 
-function pick(pr, keys, fallback=null) {
+function setBanner(kind, msg){
+  const el = document.getElementById('banner');
+  if (!msg){
+    el.style.display = 'none';
+    el.className = 'banner';
+    el.textContent = '';
+    return;
+  }
+  el.style.display = 'block';
+  el.className = `banner ${kind}`;
+  el.textContent = msg;
+}
+
+function setStatus(msg) { document.getElementById('status').textContent = msg; }
+
+function pick(obj, keys, fallback=null) {
   for (const k of keys) {
-    if (pr && pr[k] !== undefined && pr[k] !== null && pr[k] !== '') return pr[k];
+    if (obj && obj[k] !== undefined && obj[k] !== null && obj[k] !== '') return obj[k];
   }
   return fallback;
 }
 
-function pickNum(pr, keys, fallback=NaN) {
-  const v = pick(pr, keys, fallback);
+function pickNum(obj, keys, fallback=NaN) {
+  const v = pick(obj, keys, fallback);
   const n = Number(v);
   return Number.isFinite(n) ? n : fallback;
+}
+
+/* Normalize value to [0,1] using dataset min/max if autoNorm is enabled */
+function norm01(v, min, max, autoNorm) {
+  if (!Number.isFinite(v)) return NaN;
+
+  // If already in [0,1], keep it
+  if (!autoNorm) return v;
+  if (v >= 0 && v <= 1 && Number.isFinite(v)) return v;
+
+  // Use dataset-based scaling if possible
+  if (Number.isFinite(min) && Number.isFinite(max) && max > min) {
+    return clamp((v - min) / (max - min), 0, 1);
+  }
+
+  // Fallback: if looks like 1..5 scale, or 0..100 scale
+  if (v >= 1 && v <= 5) return (v - 1) / 4;
+  if (v >= 0 && v <= 100) return v / 100;
+
+  return NaN;
 }
 
 function percentile(values, p) {
@@ -367,35 +524,241 @@ function popClass(totPop) {
   return '<100k';
 }
 
+/* Marker radius: more visible range; still log-scaled */
 function markerRadius(totPop) {
-  // log scale between ~3 and 14 px
   const p = Math.max(1, Number(totPop || 1));
-  const r = 2.5 + 3.2 * Math.log10(p);
-  return Math.max(3, Math.min(14, r));
+  const r = 3.0 + 4.2 * Math.log10(p);     // increased spread
+  return Math.max(3, Math.min(18, r));     // up to 18 px
 }
 
-function computeScores(feature, wH) {
-  const pr = feature.properties;
+/* Renormalize three weights so they sum to 1 (if all zeros -> defaults) */
+function renorm3(a,b,c, da,db,dc){
+  const s = a+b+c;
+  if (s <= 0) return {a:da, b:db, c:dc};
+  return {a:a/s, b:b/s, c:c/s};
+}
 
-  // Hazard components (assumed already in [0,1])
-  const flood = Number(pr.FloodSus_m ?? pr.FloodSus ?? pr.flood ?? 0);
-  const drou  = Number(pr.DrouSus_m  ?? pr.DrouSus  ?? pr.drou  ?? 0);
-  const fire  = Number(pr.FireSus_m  ?? pr.FireSus  ?? pr.fire  ?? 0);
-  const H = 0.55*flood + 0.35*drou + 0.10*fire;
+/* Renormalize two weights so they sum to 1 (if all zeros -> defaults) */
+function renorm2(a,b, da,db){
+  const s = a+b;
+  if (s <= 0) return {a:da, b:db};
+  return {a:a/s, b:b/s};
+}
 
-  // Socio index S is precomputed in the GeoJSON as SocioIndex
-  const S = Number(pr.SocioIndex ?? pr.SocioeconomicIndex ?? pr.S ?? 0);
+/* Compute dataset min/max for key groups */
+function computeStats() {
+  function minmax(arr){
+    const v = arr.filter(Number.isFinite);
+    if (!v.length) return {min:NaN, max:NaN};
+    return {min: Math.min(...v), max: Math.max(...v)};
+  }
+
+  const floodRaw = cities.map(f => f.properties._floodRaw);
+  const drouRaw  = cities.map(f => f.properties._drouRaw);
+  const fireRaw  = cities.map(f => f.properties._fireRaw);
+  const hdiRaw   = cities.map(f => f.properties._hdiRaw);
+  const gdpRaw   = cities.map(f => f.properties._gdpPcRaw);
+  const popRaw   = cities.map(f => f.properties.totPop);
+  const socioRaw = cities.map(f => f.properties._socioRaw);
+
+  stats.flood = minmax(floodRaw);
+  stats.drou  = minmax(drouRaw);
+  stats.fire  = minmax(fireRaw);
+  stats.hdi   = minmax(hdiRaw);
+  stats.gdp   = minmax(gdpRaw);
+  stats.pop   = minmax(popRaw);
+  stats.socio = minmax(socioRaw);
+
+  // Detect the “everything = 1” or “no variability” problem early
+  const hazardRangeTiny =
+    (Number.isFinite(stats.flood.min) && Number.isFinite(stats.flood.max) && (stats.flood.max - stats.flood.min) < 1e-9) &&
+    (Number.isFinite(stats.drou.min)  && Number.isFinite(stats.drou.max)  && (stats.drou.max  - stats.drou.min)  < 1e-9) &&
+    (Number.isFinite(stats.fire.min)  && Number.isFinite(stats.fire.max)  && (stats.fire.max  - stats.fire.min)  < 1e-9);
+
+  if (hazardRangeTiny) {
+    setBanner('warn',
+      'Heads up: your Flood/Drought/Fire fields show ~no variability across cities. ' +
+      'This usually means the export used a fully reclassified constant layer or the wrong columns. ' +
+      'Auto-normalization cannot create variability if the underlying data are constant.'
+    );
+  } else {
+    setBanner('', null);
+  }
+}
+
+/* Build canonical properties so filters NEVER show "undefined" */
+function canonicalizeProperties(obj, i) {
+  const lon = Number(pick(obj, ['lon','LON','longitude','Longitude','x','X'], NaN));
+  const lat = Number(pick(obj, ['lat','LAT','latitude','Latitude','y','Y'], NaN));
+
+  const city = pick(obj, ['ADM2_NAME','City','city','NAME_2','name','NAME'], 'Unknown city');
+  const state = pick(obj, ['ADM1_NAME','State','state','NAME_1','admin1'], '—');
+  const country = pick(obj, ['ADM0_NAME','Country','country','NAME_0','admin0'], '—');
+
+  const totPop = pickNum(obj, ['TotPop','TOTPOP','population','Pop','POP','totPop'], NaN);
+  const popDen = pickNum(obj, ['PopDen_m','PopDen','popden','PopDensity','pop_density','PopDenMean'], NaN);
+  const imperv = pickNum(obj, ['Imperv_m','ImpervFrac','imperv','impervious','impervious_frac','ImpFrac'], NaN);
+
+  // Raw hazard pieces (could be 1..5, 0..100, 0..1 — we store raw and normalize later)
+  const floodRaw = pickNum(obj, ['FloodSus_m','FloodSus','Flood','flood','FSI_flood','FloodIndex'], NaN);
+  const drouRaw  = pickNum(obj, ['DrouSus_m','DrouSus','Drought','drou','DSI_drought','DroughtIndex'], NaN);
+  const fireRaw  = pickNum(obj, ['FireSus_m','FireSus','Fire','fire','FRI_fire','FireIndex'], NaN);
+
+  // Socio ingredients
+  const hdiRaw = pickNum(obj, ['HDI_m','HDI','hdi'], NaN);
+
+  // GDP per cap might be given or derivable
+  const gdpPcRaw = pickNum(obj, ['GDPpc','GDP_PC','gdp_pc','gdpPerCap','GDPpc_m'], NaN);
+  const totGDP = pickNum(obj, ['TotGDP','TOTGDP','GDP','gdp','TotalGDP'], NaN);
+  const gdpPcDerived = (Number.isFinite(totGDP) && Number.isFinite(totPop) && totPop > 0) ? (totGDP / totPop) : NaN;
+  const gdpPc = Number.isFinite(gdpPcRaw) ? gdpPcRaw : gdpPcDerived;
+
+  // If your export already has SocioIndex, we keep it as raw too (for debugging)
+  const socioRaw = pickNum(obj, ['SocioIndex','SocioeconomicIndex','S','socio','Socio_m'], NaN);
+
+  const hmi = pickNum(obj, ['HMI_m','HMI','hmi','HumanMod','HumanModification'], NaN);
+
+  const cityId = pick(obj, ['CITY_ID','city_id','ID','id'], `${country}|${state}|${city}|${i}`);
+
+  return {
+    type: 'Feature',
+    properties: {
+      // Canonical strings for filtering & sidebar
+      cityName: city,
+      stateName: state,
+      countryName: country,
+      cityId,
+
+      // Canonical numeric fields
+      totPop,
+      popDen,
+      imperv,
+      hmi,
+
+      // store raw values for normalization/debug
+      _floodRaw: floodRaw,
+      _drouRaw: drouRaw,
+      _fireRaw: fireRaw,
+      _hdiRaw: hdiRaw,
+      _gdpPcRaw: gdpPc,
+      _socioRaw: socioRaw
+    },
+    geometry: { type: 'Point', coordinates: [lon, lat] }
+  };
+}
+
+/* ========================= WEIGHT UI HELPERS ============================ */
+function readWeightsFromUI() {
+  const wH = Number(document.getElementById('wH').value);
+  const autoNorm = document.getElementById('autoNorm').checked;
+
+  // hazard weights
+  const wFloodRaw = Number(document.getElementById('wFlood').value);
+  const wDrouRaw  = Number(document.getElementById('wDrou').value);
+  const wFireRaw  = Number(document.getElementById('wFire').value);
+  const hz = renorm3(wFloodRaw, wDrouRaw, wFireRaw, 0.55, 0.35, 0.10);
+
+  // adaptive weights
+  const wGDPRaw = Number(document.getElementById('wGDP').value);
+  const wHDIRaw = Number(document.getElementById('wHDI').value);
+  const ad = renorm2(wGDPRaw, wHDIRaw, 0.40, 0.60);
+
+  // update labels
+  document.getElementById('wHLabel').textContent = wH.toFixed(2);
+
+  document.getElementById('wFloodLabel').textContent = hz.a.toFixed(2);
+  document.getElementById('wDrouLabel').textContent  = hz.b.toFixed(2);
+  document.getElementById('wFireLabel').textContent  = hz.c.toFixed(2);
+
+  document.getElementById('wGDPLabel').textContent   = ad.a.toFixed(2);
+  document.getElementById('wHDILabel').textContent   = ad.b.toFixed(2);
+
+  return {
+    wH,
+    autoNorm,
+    wFlood: hz.a,
+    wDrou:  hz.b,
+    wFire:  hz.c,
+    wGDP:   ad.a,
+    wHDI:   ad.b
+  };
+}
+
+function attachWeightListeners() {
+  const ids = ['wH','autoNorm','wFlood','wDrou','wFire','wGDP','wHDI'];
+  ids.forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.addEventListener(id === 'autoNorm' ? 'change' : 'input', applyFilters);
+  });
+
+  document.getElementById('resetWeights').addEventListener('click', () => {
+    document.getElementById('wH').value = 0.6;
+    document.getElementById('autoNorm').checked = true;
+
+    document.getElementById('wFlood').value = 0.55;
+    document.getElementById('wDrou').value  = 0.35;
+    document.getElementById('wFire').value  = 0.10;
+
+    document.getElementById('wGDP').value   = 0.40;
+    document.getElementById('wHDI').value   = 0.60;
+
+    applyFilters();
+  });
+}
+
+/* =========================== SCORE COMPUTATION ========================== */
+/**
+ * computeScores():
+ * - Normalizes hazard pieces + socio ingredients (HDI, GDPpc) when autoNorm is enabled
+ * - Builds H, S, V, Priority
+ */
+function computeScores(feature, weights) {
+  const p = feature.properties;
+
+  // Normalize hazard inputs to [0,1]
+  const flood = norm01(p._floodRaw, stats.flood.min, stats.flood.max, weights.autoNorm);
+  const drou  = norm01(p._drouRaw,  stats.drou.min,  stats.drou.max,  weights.autoNorm);
+  const fire  = norm01(p._fireRaw,  stats.fire.min,  stats.fire.max,  weights.autoNorm);
+
+  // Hazard composite
+  const H = (weights.wFlood * (Number.isFinite(flood) ? flood : 0)) +
+            (weights.wDrou  * (Number.isFinite(drou)  ? drou  : 0)) +
+            (weights.wFire  * (Number.isFinite(fire)  ? fire  : 0));
+
+  // Adaptive Capacity ingredients normalized
+  const hdi = norm01(p._hdiRaw, stats.hdi.min, stats.hdi.max, weights.autoNorm);
+
+  // GDP per cap is usually heavy-tailed; using log scaling is more stable
+  const gdp = Number.isFinite(p._gdpPcRaw) ? p._gdpPcRaw : NaN;
+  let gdpNorm = NaN;
+  if (Number.isFinite(gdp)) {
+    const gdpLog = Math.log10(Math.max(gdp, 1));
+    const minLog = Number.isFinite(stats.gdp.min) ? Math.log10(Math.max(stats.gdp.min, 1)) : NaN;
+    const maxLog = Number.isFinite(stats.gdp.max) ? Math.log10(Math.max(stats.gdp.max, 1)) : NaN;
+    gdpNorm = weights.autoNorm ? norm01(gdpLog, minLog, maxLog, true) : gdp;
+  }
+
+  // Adaptive Capacity S
+  const S = (weights.wGDP * (Number.isFinite(gdpNorm) ? gdpNorm : 0)) +
+            (weights.wHDI * (Number.isFinite(hdi) ? hdi : 0));
+
   const V = 1 - S;
 
-  const priority = 100 * (wH*H + (1-wH)*V);
+  // Priority score
+  const priority = 100 * (weights.wH * H + (1 - weights.wH) * V);
 
-  return { H, S, V, priority, flood, drou, fire };
+  return {
+    flood, drou, fire,
+    H: clamp(H, 0, 1),
+    S: clamp(S, 0, 1),
+    V: clamp(V, 0, 1),
+    priority: clamp(priority, 0, 100),
+    gdpNorm, hdiNorm: hdi
+  };
 }
 
-function setStatus(msg) {
-  document.getElementById('status').textContent = msg;
-}
-
+/* ============================= SIDEBAR ================================== */
 function setTierBadge(tier) {
   const el = document.getElementById('tierBadge');
   const st = TIER_STYLE[tier] || TIER_STYLE.NA;
@@ -412,7 +775,7 @@ function renderBar(scores) {
   }
 
   const x = [scores.H, scores.V];
-  const y = ['Hazard (H)', 'Vulnerability (1−S)'];
+  const y = ['Hazard (H)', 'Vulnerability (V)'];
 
   const data = [{
     type: 'bar',
@@ -422,10 +785,9 @@ function renderBar(scores) {
   }];
 
   const layout = {
-    margin: { l: 130, r: 10, t: 8, b: 35 },
+    margin: { l: 150, r: 10, t: 8, b: 35 },
     xaxis: {
       range: [0, 1],
-      title: '',
       zeroline: false,
       showgrid: false,
       ticks: 'outside',
@@ -437,8 +799,6 @@ function renderBar(scores) {
       zeroline: false,
       showgrid: false,
       ticks: 'outside',
-      tickwidth: 2,
-      linewidth: 0,
       automargin: true
     },
     showlegend: false
@@ -448,14 +808,10 @@ function renderBar(scores) {
 }
 
 function updateSidebar(feature, tier, scores) {
-  const pr = feature.properties;
+  const p = feature.properties;
 
-  const name = pick(pr, ['ADM2_NAME','city','City','NAME','name','NAME_2'], 'Unknown city');
-  const state = pick(pr, ['ADM1_NAME','state','State','NAME_1'], '—');
-  const country = pick(pr, ['ADM0_NAME','country','Country','NAME_0'], '—');
-
-  document.getElementById('cityName').textContent = name;
-  document.getElementById('cityMeta').textContent = `${state}, ${country}`;
+  document.getElementById('cityName').textContent = p.cityName || 'Unknown city';
+  document.getElementById('cityMeta').textContent = `${p.stateName || '—'}, ${p.countryName || '—'}`;
 
   document.getElementById('priorityVal').textContent = scores ? fmt(scores.priority, 1) : '—';
   document.getElementById('hazVal').textContent = scores ? fmt(scores.H, 2) : '—';
@@ -464,77 +820,57 @@ function updateSidebar(feature, tier, scores) {
   setTierBadge(tier);
   renderBar(scores);
 
-  // Robust numeric lookups
-  const totPop  = pickNum(pr, ['TotPop','TOTPOP','population','pop','Pop','POP'], NaN);
-  const popDen  = pickNum(pr, ['PopDen_m','PopDen','popden','PopDensity','pop_density'], NaN);
-  const imperv  = pickNum(pr, ['Imperv_m','ImpervFrac','imperv','impervious','impervious_frac'], NaN);
-  const hdi     = pickNum(pr, ['HDI_m','HDI','hdi'], NaN);
-
-  // GDP per cap may be stored already or derivable
-  const gdpPcStored = pickNum(pr, ['GDPpc','GDP_PC','gdp_pc','gdpPerCap'], NaN);
-  const totGDP = pickNum(pr, ['TotGDP','TOTGDP','gdp','GDP'], NaN);
-  const gdpPc = Number.isFinite(gdpPcStored) ? gdpPcStored :
-                (Number.isFinite(totGDP) && Number.isFinite(totPop) && totPop > 0 ? totGDP / totPop : NaN);
-
-  const flood = pickNum(pr, ['FloodSus_m','FloodSus','flood'], NaN);
-  const drou  = pickNum(pr, ['DrouSus_m','DrouSus','drou'], NaN);
-  const fire  = pickNum(pr, ['FireSus_m','FireSus','fire'], NaN);
-  const hmi   = pickNum(pr, ['HMI_m','HMI','hmi'], NaN);
-
+  // Units + clean formatting
   const kv = document.getElementById('kv');
   const rows = [
-    ['Population', Number.isFinite(totPop) ? fmtInt(totPop) : 'NA'],
-    ['Pop. density (mean)', Number.isFinite(popDen) ? fmt(popDen, 0) : 'NA'],
-    ['Impervious fraction (mean)', Number.isFinite(imperv) ? fmt(imperv, 2) : 'NA'],
-    ['HDI (mean)', Number.isFinite(hdi) ? fmt(hdi, 3) : 'NA'],
-    ['GDP per cap (raw)', Number.isFinite(gdpPc) ? `$${Math.round(gdpPc).toLocaleString('en-US')}` : 'NA'],
-    ['FloodSus', Number.isFinite(flood) ? fmt(flood, 2) : 'NA'],
-    ['DrouSus', Number.isFinite(drou) ? fmt(drou, 2) : 'NA'],
-    ['FireSus', Number.isFinite(fire) ? fmt(fire, 2) : 'NA'],
-    ['Human Mod. (mean)', Number.isFinite(hmi) ? fmt(hmi, 2) : 'NA']
+    ['Population (people)', Number.isFinite(p.totPop) ? fmtInt(p.totPop) : 'NA'],
+    ['Population density (people / km²)', Number.isFinite(p.popDen) ? fmt(p.popDen, 0) : 'NA'],
+    ['Impervious fraction (0–1)', Number.isFinite(p.imperv) ? fmt(p.imperv, 2) : 'NA'],
+    ['HDI (0–1)', Number.isFinite(p._hdiRaw) ? fmt(p._hdiRaw, 3) : 'NA'],
+    ['GDP per cap (USD / person)', Number.isFinite(p._gdpPcRaw) ? `$${Math.round(p._gdpPcRaw).toLocaleString('en-US')}` : 'NA'],
+    ['Flood component (raw)', Number.isFinite(p._floodRaw) ? fmt(p._floodRaw, 2) : 'NA'],
+    ['Drought component (raw)', Number.isFinite(p._drouRaw) ? fmt(p._drouRaw, 2) : 'NA'],
+    ['Fire component (raw)', Number.isFinite(p._fireRaw) ? fmt(p._fireRaw, 2) : 'NA'],
+    ['Human modification (0–1)', Number.isFinite(p.hmi) ? fmt(p.hmi, 2) : 'NA'],
   ];
 
   kv.innerHTML = rows.map(([k,v]) => `<div class="k">${k}</div><div>${v}</div>`).join('');
 }
 
-// ============================= FILTERING ==================================
+/* ============================= FILTERING ================================= */
 function getUI() {
-  const wH = Number(document.getElementById('wH').value);
   const country = document.getElementById('country').value;
   const state = document.getElementById('state').value;
   const popClassSel = document.getElementById('popClass').value;
   const rankBy = document.getElementById('rankBy').value;
-  const topN = Math.max(10, Math.min(500, Number(document.getElementById('topN').value || 100)));
-  return { wH, country, state, popClassSel, rankBy, topN };
+  const topN = Math.max(10, Math.min(10000, Number(document.getElementById('topN').value || 500)));
+  return { country, state, popClassSel, rankBy, topN };
 }
 
 function applyFilters() {
   const ui = getUI();
-  document.getElementById('wHLabel').textContent = ui.wH.toFixed(2);
+  const w = readWeightsFromUI();
 
-  // 1) filter by country/state/pop class
+  // 1) subset filtering
   let subset = cities.filter(f => {
     const p = f.properties;
-    if (ui.country !== 'All' && p.ADM0_NAME !== ui.country) return false;
-    if (!document.getElementById('state').disabled && ui.state !== 'All' && p.ADM1_NAME !== ui.state) return false;
-    if (ui.popClassSel !== 'all' && popClass(p.TotPop) !== ui.popClassSel) return false;
+    if (ui.country !== 'All' && p.countryName !== ui.country) return false;
+    if (!document.getElementById('state').disabled && ui.state !== 'All' && p.stateName !== ui.state) return false;
+    if (ui.popClassSel !== 'all' && popClass(p.totPop) !== ui.popClassSel) return false;
     return true;
   });
 
   if (!subset.length) {
     setStatus('No cities match the current filters.');
-    renderMarkers([]);
+    layerGroup.clearLayers();
     return;
   }
 
-  // 2) compute scores for subset
-  const scored = subset.map(f => {
-    const s = computeScores(f, ui.wH);
-    return { f, s };
-  });
+  // 2) compute scores
+  const scored = subset.map(f => ({ f, s: computeScores(f, w) }));
 
-  // 3) compute tier thresholds within subset
-  const priorities = scored.map(o => o.s.priority).filter(v => Number.isFinite(v));
+  // 3) tiers from priority percentiles (always: Tier 1 = highest priority)
+  const priorities = scored.map(o => o.s.priority).filter(Number.isFinite);
   const p50 = percentile(priorities, 50);
   const p75 = percentile(priorities, 75);
   const p90 = percentile(priorities, 90);
@@ -549,17 +885,16 @@ function applyFilters() {
     o.tier = tier;
   });
 
-  // 4) ranking for display
+  // 4) ranking
   const ranked = scored.slice().sort((a,b) => {
     if (ui.rankBy === 'priority') return b.s.priority - a.s.priority;
-    const av = Number(a.f.properties[ui.rankBy] || 0);
-    const bv = Number(b.f.properties[ui.rankBy] || 0);
-    return bv - av;
+    if (ui.rankBy === 'totPop') return (b.f.properties.totPop || 0) - (a.f.properties.totPop || 0);
+    if (ui.rankBy === 'imperv') return (b.f.properties.imperv || 0) - (a.f.properties.imperv || 0);
+    return b.s.priority - a.s.priority;
   });
 
+  // 5) display
   const shown = ranked.slice(0, ui.topN);
-
-  // 5) render
   renderMarkers(shown);
 
   setStatus(
@@ -567,16 +902,14 @@ function applyFilters() {
     `Tier thresholds within filtered set: P50=${p50.toFixed(1)}, P75=${p75.toFixed(1)}, P90=${p90.toFixed(1)}.`
   );
 
-  // if previously selected city is still visible, keep it highlighted
+  // Persist selection if still visible
   if (lastSelectedId) {
-    const hit = shown.find(o => o.f.properties.CITY_ID === lastSelectedId);
-    if (hit) {
-      updateSidebar(hit.f, hit.tier, hit.s);
-    }
+    const hit = shown.find(o => o.f.properties.cityId === lastSelectedId);
+    if (hit) updateSidebar(hit.f, hit.tier, hit.s);
   }
 }
 
-// ============================= MAP ========================================
+/* ================================ MAP =================================== */
 function renderMarkers(scoredArray) {
   layerGroup.clearLayers();
   currentMarkers = [];
@@ -585,42 +918,43 @@ function renderMarkers(scoredArray) {
     const f = o.f;
     const s = o.s;
     const tier = o.tier;
+    const st = TIER_STYLE[tier] || TIER_STYLE.NA;
 
     const [lon, lat] = f.geometry.coordinates;
-    const style = TIER_STYLE[tier] || TIER_STYLE.NA;
+    if (!Number.isFinite(lon) || !Number.isFinite(lat)) return;
 
     const marker = L.circleMarker([lat, lon], {
-      radius: markerRadius(pickNum(f.properties, ['TotPop','TOTPOP','population','pop','Pop','POP'], 1)),
-      color: style.stroke,
+      radius: markerRadius(f.properties.totPop),
+      color: st.stroke,
       weight: 1.2,
-      fillColor: style.fill,
+      fillColor: st.fill,
       fillOpacity: 0.85
     });
 
     marker.on('click', () => {
-      lastSelectedId = f.properties.CITY_ID;
+      lastSelectedId = f.properties.cityId;
       updateSidebar(f, tier, s);
-
-      // subtle highlight: increase outline
       currentMarkers.forEach(m => m.setStyle({weight: 1.2}));
       marker.setStyle({weight: 3});
     });
 
-    const popup = `<b>${f.properties.ADM2_NAME}</b><br>${f.properties.ADM1_NAME}, ${f.properties.ADM0_NAME}<br>` +
-                  `Priority: ${s.priority.toFixed(1)} (${TIER_STYLE[tier].label})`;
-    marker.bindTooltip(popup, {sticky:true});
+    marker.bindTooltip(
+      `<b>${f.properties.cityName}</b><br>${f.properties.stateName}, ${f.properties.countryName}<br>` +
+      `Priority: ${s.priority.toFixed(1)} (${st.label})`,
+      {sticky:true}
+    );
 
     marker.addTo(layerGroup);
     currentMarkers.push(marker);
   });
 }
 
-// ============================= UI POPULATION ==============================
+/* ========================== FILTER DROPDOWNS ============================= */
 function populateFilters() {
   const countryEl = document.getElementById('country');
   const stateEl = document.getElementById('state');
 
-  const countries = Array.from(new Set(cities.map(f => f.properties.ADM0_NAME))).sort();
+  const countries = Array.from(new Set(cities.map(f => f.properties.countryName).filter(Boolean))).sort();
   countryEl.innerHTML = ['All', ...countries].map(c => `<option value="${c}">${c}</option>`).join('');
 
   function refreshStates() {
@@ -630,7 +964,10 @@ function populateFilters() {
       stateEl.innerHTML = `<option value="All">All</option>`;
       return;
     }
-    const states = Array.from(new Set(cities.filter(f => f.properties.ADM0_NAME === c).map(f => f.properties.ADM1_NAME))).sort();
+    const states = Array.from(new Set(
+      cities.filter(f => f.properties.countryName === c).map(f => f.properties.stateName).filter(Boolean)
+    )).sort();
+
     stateEl.disabled = false;
     stateEl.innerHTML = ['All', ...states].map(s => `<option value="${s}">${s}</option>`).join('');
   }
@@ -644,15 +981,15 @@ function populateFilters() {
   document.getElementById('popClass').addEventListener('change', applyFilters);
   document.getElementById('rankBy').addEventListener('change', applyFilters);
   document.getElementById('topN').addEventListener('change', applyFilters);
-  document.getElementById('wH').addEventListener('input', applyFilters);
 
   refreshStates();
 }
 
-// ============================= LOAD =======================================
+/* =============================== LOAD ==================================== */
 async function load() {
   // Map init
   map = L.map('map', { zoomControl: true }).setView([-18, -60], 4);
+
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 18,
     attribution: '&copy; OpenStreetMap'
@@ -663,60 +1000,39 @@ async function load() {
   try {
     const resp = await fetch(DATA_URL, {cache:'no-cache'});
     if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+
     const data = await resp.json();
-    
-    /**
-     * Normalize EVERYTHING into GeoJSON-like Features:
-     * cities = [{ properties: {...}, geometry: { coordinates:[lon,lat] } }, ...]
-     */
+
+    // Normalize into canonical GeoJSON-like features
     if (Array.isArray(data)) {
-      // cities.json: array of flat objects with lat/lon + attributes
-      cities = data.map((obj, i) => {
-        const lon = Number(obj.lon ?? obj.LON ?? obj.longitude ?? obj.Longitude);
-        const lat = Number(obj.lat ?? obj.LAT ?? obj.latitude ?? obj.Latitude);
-    
-        return {
-          type: 'Feature',
-          properties: {
-            ...obj,
-            // ensure CITY_ID exists (used for selection persistence)
-            CITY_ID: obj.CITY_ID ?? obj.city_id ?? obj.ADM2_NAME ?? `city_${i}`
-          },
-          geometry: {
-            type: 'Point',
-            coordinates: [lon, lat]
-          }
-        };
-      }).filter(f => Number.isFinite(f.geometry.coordinates[0]) && Number.isFinite(f.geometry.coordinates[1]));
-    
+      cities = data.map((obj, i) => canonicalizeProperties(obj, i))
+        .filter(f => Number.isFinite(f.geometry.coordinates[0]) && Number.isFinite(f.geometry.coordinates[1]));
     } else if (data && Array.isArray(data.features)) {
-      // GeoJSON FeatureCollection
-      cities = data.features.map((ft, i) => {
-        const p = ft.properties || {};
-        const c = ft.geometry && ft.geometry.coordinates ? ft.geometry.coordinates : [NaN, NaN];
-        return {
-          type: 'Feature',
-          properties: {
-            ...p,
-            CITY_ID: p.CITY_ID ?? p.city_id ?? p.ADM2_NAME ?? `city_${i}`
-          },
-          geometry: {
-            type: 'Point',
-            coordinates: [Number(c[0]), Number(c[1])]
-          }
-        };
-      }).filter(f => Number.isFinite(f.geometry.coordinates[0]) && Number.isFinite(f.geometry.coordinates[1]));
-    
+      cities = data.features.map((ft, i) => canonicalizeProperties(ft.properties || {}, i))
+        .filter(f => Number.isFinite(f.geometry.coordinates[0]) && Number.isFinite(f.geometry.coordinates[1]));
     } else {
       cities = [];
     }
+
+    if (!cities.length) {
+      setStatus('No valid city points found. Check that cities.json contains lat/lon columns.');
+      return;
+    }
+
+    // Compute stats + warn if hazard fields are constant
+    computeStats();
+
     populateFilters();
+    attachWeightListeners();
     applyFilters();
 
-    setStatus('Loaded. Use filters to explore.');
+    setStatus('Loaded. Use filters and sliders to explore.');
+    setBanner('ok', `Loaded ${cities.length.toLocaleString('en-US')} cities. Select filters and adjust weights as needed.`);
+
   } catch (e) {
     console.error(e);
     setStatus('Error loading data. Make sure cities.json is in the same folder as index.html (or update DATA_URL).');
+    setBanner('warn', 'Could not load cities.json. If using GitHub Pages, confirm the file is reachable at /cities.json.');
   }
 }
 
@@ -724,3 +1040,4 @@ document.addEventListener('DOMContentLoaded', load);
 </script>
 </body>
 </html>
+
