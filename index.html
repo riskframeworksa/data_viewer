@@ -335,6 +335,19 @@ function fmtInt(x) {
   return Math.round(Number(x)).toLocaleString('en-US');
 }
 
+function pick(pr, keys, fallback=null) {
+  for (const k of keys) {
+    if (pr && pr[k] !== undefined && pr[k] !== null && pr[k] !== '') return pr[k];
+  }
+  return fallback;
+}
+
+function pickNum(pr, keys, fallback=NaN) {
+  const v = pick(pr, keys, fallback);
+  const n = Number(v);
+  return Number.isFinite(n) ? n : fallback;
+}
+
 function percentile(values, p) {
   if (!values.length) return NaN;
   const v = values.slice().sort((a,b)=>a-b);
@@ -436,11 +449,13 @@ function renderBar(scores) {
 
 function updateSidebar(feature, tier, scores) {
   const pr = feature.properties;
-  const name = pr.ADM2_NAME || 'Unknown city';
-  document.getElementById('cityName').textContent = name;
 
-  const meta = `${pr.ADM1_NAME || '—'}, ${pr.ADM0_NAME || '—'}`;
-  document.getElementById('cityMeta').textContent = meta;
+  const name = pick(pr, ['ADM2_NAME','city','City','NAME','name','NAME_2'], 'Unknown city');
+  const state = pick(pr, ['ADM1_NAME','state','State','NAME_1'], '—');
+  const country = pick(pr, ['ADM0_NAME','country','Country','NAME_0'], '—');
+
+  document.getElementById('cityName').textContent = name;
+  document.getElementById('cityMeta').textContent = `${state}, ${country}`;
 
   document.getElementById('priorityVal').textContent = scores ? fmt(scores.priority, 1) : '—';
   document.getElementById('hazVal').textContent = scores ? fmt(scores.H, 2) : '—';
@@ -449,25 +464,37 @@ function updateSidebar(feature, tier, scores) {
   setTierBadge(tier);
   renderBar(scores);
 
-  // Key-value table (keep it short and planner-friendly)
-  const kv = document.getElementById('kv');
-  const gdpPc = pr.GDPpc === null || pr.GDPpc === undefined ? null : Number(pr.GDPpc);
+  // Robust numeric lookups
+  const totPop  = pickNum(pr, ['TotPop','TOTPOP','population','pop','Pop','POP'], NaN);
+  const popDen  = pickNum(pr, ['PopDen_m','PopDen','popden','PopDensity','pop_density'], NaN);
+  const imperv  = pickNum(pr, ['Imperv_m','ImpervFrac','imperv','impervious','impervious_frac'], NaN);
+  const hdi     = pickNum(pr, ['HDI_m','HDI','hdi'], NaN);
 
+  // GDP per cap may be stored already or derivable
+  const gdpPcStored = pickNum(pr, ['GDPpc','GDP_PC','gdp_pc','gdpPerCap'], NaN);
+  const totGDP = pickNum(pr, ['TotGDP','TOTGDP','gdp','GDP'], NaN);
+  const gdpPc = Number.isFinite(gdpPcStored) ? gdpPcStored :
+                (Number.isFinite(totGDP) && Number.isFinite(totPop) && totPop > 0 ? totGDP / totPop : NaN);
+
+  const flood = pickNum(pr, ['FloodSus_m','FloodSus','flood'], NaN);
+  const drou  = pickNum(pr, ['DrouSus_m','DrouSus','drou'], NaN);
+  const fire  = pickNum(pr, ['FireSus_m','FireSus','fire'], NaN);
+  const hmi   = pickNum(pr, ['HMI_m','HMI','hmi'], NaN);
+
+  const kv = document.getElementById('kv');
   const rows = [
-    ['Population', fmtInt(pr.TotPop)],
-    ['Pop. density (mean)', fmt(pr.PopDen_m, 0)],
-    ['Impervious fraction (mean)', fmt(pr.Imperv_m, 2)],
-    ['HDI (mean)', fmt(pr.HDI_m, 3)],
-    ['GDP per cap (raw)', gdpPc ? `$${Math.round(gdpPc).toLocaleString('en-US')}` : 'NA'],
-    ['FloodSus', fmt(pr.FloodSus_m, 2)],
-    ['DrouSus', fmt(pr.DrouSus_m, 2)],
-    ['FireSus', fmt(pr.FireSus_m, 2)],
-    ['Human Mod. (mean)', fmt(pr.HMI_m, 2)]
+    ['Population', Number.isFinite(totPop) ? fmtInt(totPop) : 'NA'],
+    ['Pop. density (mean)', Number.isFinite(popDen) ? fmt(popDen, 0) : 'NA'],
+    ['Impervious fraction (mean)', Number.isFinite(imperv) ? fmt(imperv, 2) : 'NA'],
+    ['HDI (mean)', Number.isFinite(hdi) ? fmt(hdi, 3) : 'NA'],
+    ['GDP per cap (raw)', Number.isFinite(gdpPc) ? `$${Math.round(gdpPc).toLocaleString('en-US')}` : 'NA'],
+    ['FloodSus', Number.isFinite(flood) ? fmt(flood, 2) : 'NA'],
+    ['DrouSus', Number.isFinite(drou) ? fmt(drou, 2) : 'NA'],
+    ['FireSus', Number.isFinite(fire) ? fmt(fire, 2) : 'NA'],
+    ['Human Mod. (mean)', Number.isFinite(hmi) ? fmt(hmi, 2) : 'NA']
   ];
 
-  kv.innerHTML = rows.map(([k,v]) => `
-    <div class="k">${k}</div><div>${v}</div>
-  `).join('');
+  kv.innerHTML = rows.map(([k,v]) => `<div class="k">${k}</div><div>${v}</div>`).join('');
 }
 
 // ============================= FILTERING ==================================
@@ -563,7 +590,7 @@ function renderMarkers(scoredArray) {
     const style = TIER_STYLE[tier] || TIER_STYLE.NA;
 
     const marker = L.circleMarker([lat, lon], {
-      radius: markerRadius(f.properties.TotPop),
+      radius: markerRadius(pickNum(f.properties, ['TotPop','TOTPOP','population','pop','Pop','POP'], 1)),
       color: style.stroke,
       weight: 1.2,
       fillColor: style.fill,
