@@ -1,0 +1,1671 @@
+[
+  {
+    "id": "xgb_fsi",
+    "title": "Flood Hazard Score (XGBoost)",
+    "kind": "raster",
+    "render_mode": "continuous",
+    "source_file": "01_Zenodo/Results/Benchmarks/Flood_XGBoost_vs_WLC/XGB_FSI.tif",
+    "groups": [
+      "hazard_susceptibility"
+    ],
+    "description": "Flood hazard score from the XGBoost model. Higher values mean the model sees more flood-prone conditions.",
+    "units": "Probability",
+    "legend_title": "Probability",
+    "palette": "flood",
+    "display_range": [
+      0.0,
+      1.0
+    ],
+    "tile_format": "webp",
+    "source_resampling": "bilinear",
+    "download_resampling": "bilinear",
+    "stats": {
+      "min": 0.000131,
+      "max": 1.0,
+      "mean": 0.317626,
+      "p2": 0.002649,
+      "p50": 0.163995,
+      "p98": 1.0,
+      "display_min": 0.0,
+      "display_max": 1.0
+    },
+    "bounds_4326": [
+      [
+        -55.991992,
+        -92.005451
+      ],
+      [
+        14.885084,
+        -32.3663
+      ]
+    ],
+    "legend_ticks": [
+      0.0,
+      0.25,
+      0.5,
+      0.75,
+      1.0
+    ],
+    "legend_gradient": [
+      "#0b1f8a",
+      "#2f73b3",
+      "#87c0cf",
+      "#dde189",
+      "#f48447",
+      "#a50026"
+    ],
+    "tile_url": "data/layers/xgb_fsi/tiles/{z}/{x}/{y}.webp",
+    "download_url": "data/downloads/xgb_fsi.tif"
+  },
+  {
+    "id": "xgb_dsi",
+    "title": "Drought Hazard Score (XGBoost)",
+    "kind": "raster",
+    "render_mode": "continuous",
+    "source_file": "01_Zenodo/Results/Benchmarks/Drought_XGBoost_vs_WLC/XGB_DSI.tif",
+    "groups": [
+      "hazard_susceptibility"
+    ],
+    "description": "Drought hazard score from the XGBoost model. Higher values mean the model sees more drought-prone conditions.",
+    "units": "Probability",
+    "legend_title": "Probability",
+    "palette": "drought",
+    "display_range": [
+      0.0,
+      1.0
+    ],
+    "tile_format": "webp",
+    "source_resampling": "bilinear",
+    "download_resampling": "bilinear",
+    "stats": {
+      "min": 0.0,
+      "max": 0.999964,
+      "mean": 0.601082,
+      "p2": 0.0,
+      "p50": 0.640748,
+      "p98": 0.992678,
+      "display_min": 0.0,
+      "display_max": 1.0
+    },
+    "bounds_4326": [
+      [
+        -56.006157,
+        -82.007202
+      ],
+      [
+        13.002343,
+        -33.991527
+      ]
+    ],
+    "legend_ticks": [
+      0.0,
+      0.25,
+      0.5,
+      0.75,
+      1.0
+    ],
+    "legend_gradient": [
+      "#0b1f8a",
+      "#2f73b3",
+      "#a0bfa0",
+      "#fac25e",
+      "#de4932",
+      "#7f0000"
+    ],
+    "tile_url": "data/layers/xgb_dsi/tiles/{z}/{x}/{y}.webp",
+    "download_url": "data/downloads/xgb_dsi.tif"
+  },
+  {
+    "id": "xgb_fisi",
+    "title": "Wildfire Hazard Score (XGBoost)",
+    "kind": "raster",
+    "render_mode": "continuous",
+    "source_file": "01_Zenodo/Results/Benchmarks/Wildfire_XGBoost_vs_WLC/XGB_FiSI.tif",
+    "groups": [
+      "hazard_susceptibility"
+    ],
+    "description": "Wildfire hazard score from the XGBoost model. Higher values mean the model sees more fire-prone conditions.",
+    "units": "Probability",
+    "legend_title": "Probability",
+    "palette": "wildfire",
+    "display_range": [
+      0.0,
+      1.0
+    ],
+    "tile_format": "webp",
+    "source_resampling": "bilinear",
+    "download_resampling": "bilinear",
+    "stats": {
+      "min": 0.0,
+      "max": 0.999976,
+      "mean": 0.293325,
+      "p2": 0.0,
+      "p50": 0.161997,
+      "p98": 0.999438,
+      "display_min": 0.0,
+      "display_max": 1.0
+    },
+    "bounds_4326": [
+      [
+        -56.006157,
+        -82.007202
+      ],
+      [
+        13.002343,
+        -33.991527
+      ]
+    ],
+    "legend_ticks": [
+      0.0,
+      0.25,
+      0.5,
+      0.75,
+      1.0
+    ],
+    "legend_gradient": [
+      "#2d004b",
+      "#542788",
+      "#9e3a8a",
+      "#e55e6b",
+      "#fdae61",
+      "#fff1a8"
+    ],
+    "tile_url": "data/layers/xgb_fisi/tiles/{z}/{x}/{y}.webp",
+    "download_url": "data/downloads/xgb_fisi.tif"
+  },
+  {
+    "id": "xgb_frei",
+    "title": "Flood People at Risk (XGBoost)",
+    "kind": "raster",
+    "render_mode": "continuous",
+    "source_file": "01_Zenodo/Results/Rasters/XGB_FREI.tif",
+    "groups": [
+      "hazard_exposure"
+    ],
+    "description": "Flood people-at-risk score. It combines flood-prone areas with population and built-up land.",
+    "units": "Normalized index",
+    "legend_title": "Index",
+    "palette": "flood",
+    "display_range": null,
+    "tile_format": "webp",
+    "source_resampling": "bilinear",
+    "download_resampling": "bilinear",
+    "stats": {
+      "min": 0.75,
+      "max": 3.994725,
+      "mean": 1.941261,
+      "p2": 0.755989,
+      "p50": 1.882379,
+      "p98": 3.205121,
+      "display_min": 0.755989,
+      "display_max": 3.205121
+    },
+    "bounds_4326": [
+      [
+        -55.991992,
+        -92.005451
+      ],
+      [
+        14.885084,
+        -32.3663
+      ]
+    ],
+    "legend_ticks": [
+      0.756,
+      1.3683,
+      1.9806,
+      2.5928,
+      3.2051
+    ],
+    "legend_gradient": [
+      "#0b1f8a",
+      "#2f73b3",
+      "#87c0cf",
+      "#dde189",
+      "#f48447",
+      "#a50026"
+    ],
+    "tile_url": "data/layers/xgb_frei/tiles/{z}/{x}/{y}.webp",
+    "download_url": "data/downloads/xgb_frei.tif"
+  },
+  {
+    "id": "xgb_drei",
+    "title": "Drought People at Risk (XGBoost)",
+    "kind": "raster",
+    "render_mode": "continuous",
+    "source_file": "01_Zenodo/Results/Rasters/XGB_DREI.tif",
+    "groups": [
+      "hazard_exposure"
+    ],
+    "description": "Drought people-at-risk score. It combines drought-prone areas with population and built-up land.",
+    "units": "Normalized index",
+    "legend_title": "Index",
+    "palette": "drought",
+    "display_range": null,
+    "tile_format": "webp",
+    "source_resampling": "bilinear",
+    "download_resampling": "bilinear",
+    "stats": {
+      "min": 0.8,
+      "max": 4.194304,
+      "mean": 2.051064,
+      "p2": 0.801686,
+      "p50": 2.023601,
+      "p98": 3.445931,
+      "display_min": 0.801686,
+      "display_max": 3.445931
+    },
+    "bounds_4326": [
+      [
+        -56.006157,
+        -82.007202
+      ],
+      [
+        13.002343,
+        -33.991527
+      ]
+    ],
+    "legend_ticks": [
+      0.8017,
+      1.4627,
+      2.1238,
+      2.7849,
+      3.4459
+    ],
+    "legend_gradient": [
+      "#0b1f8a",
+      "#2f73b3",
+      "#a0bfa0",
+      "#fac25e",
+      "#de4932",
+      "#7f0000"
+    ],
+    "tile_url": "data/layers/xgb_drei/tiles/{z}/{x}/{y}.webp",
+    "download_url": "data/downloads/xgb_drei.tif"
+  },
+  {
+    "id": "xgb_firei",
+    "title": "Wildfire People at Risk (XGBoost)",
+    "kind": "raster",
+    "render_mode": "continuous",
+    "source_file": "01_Zenodo/Results/Rasters/XGB_FiREI.tif",
+    "groups": [
+      "hazard_exposure"
+    ],
+    "description": "Wildfire people-at-risk score. It combines fire-prone areas with population and built-up land.",
+    "units": "Normalized index",
+    "legend_title": "Index",
+    "palette": "wildfire",
+    "display_range": null,
+    "tile_format": "webp",
+    "source_resampling": "bilinear",
+    "download_resampling": "bilinear",
+    "stats": {
+      "min": 0.75,
+      "max": 3.992881,
+      "mean": 2.001098,
+      "p2": 0.751132,
+      "p50": 1.991296,
+      "p98": 3.352306,
+      "display_min": 0.751132,
+      "display_max": 3.352306
+    },
+    "bounds_4326": [
+      [
+        -56.006157,
+        -82.007202
+      ],
+      [
+        13.002343,
+        -33.991527
+      ]
+    ],
+    "legend_ticks": [
+      0.7511,
+      1.4014,
+      2.0517,
+      2.702,
+      3.3523
+    ],
+    "legend_gradient": [
+      "#2d004b",
+      "#542788",
+      "#9e3a8a",
+      "#e55e6b",
+      "#fdae61",
+      "#fff1a8"
+    ],
+    "tile_url": "data/layers/xgb_firei/tiles/{z}/{x}/{y}.webp",
+    "download_url": "data/downloads/xgb_firei.tif"
+  },
+  {
+    "id": "ahp_fsi",
+    "title": "Flood Simple Model",
+    "kind": "raster",
+    "render_mode": "continuous",
+    "source_file": "01_Zenodo/Results/Rasters/AHP_FSI.tif",
+    "groups": [
+      "benchmark_comparison"
+    ],
+    "description": "Simple weighted flood model used to check the XGBoost map.",
+    "units": "Weighted score",
+    "legend_title": "Score",
+    "palette": "flood",
+    "display_range": [
+      1.0,
+      5.0
+    ],
+    "tile_format": "webp",
+    "source_resampling": "bilinear",
+    "download_resampling": "bilinear",
+    "stats": {
+      "min": 1.35,
+      "max": 5.0,
+      "mean": 3.027121,
+      "p2": 1.85,
+      "p50": 2.8,
+      "p98": 5.0,
+      "display_min": 1.0,
+      "display_max": 5.0
+    },
+    "bounds_4326": [
+      [
+        -55.9875,
+        -92.00096
+      ],
+      [
+        14.880593,
+        -32.370791
+      ]
+    ],
+    "legend_ticks": [
+      1.0,
+      2.0,
+      3.0,
+      4.0,
+      5.0
+    ],
+    "legend_gradient": [
+      "#0b1f8a",
+      "#2f73b3",
+      "#87c0cf",
+      "#dde189",
+      "#f48447",
+      "#a50026"
+    ],
+    "tile_url": "data/layers/ahp_fsi/tiles/{z}/{x}/{y}.webp",
+    "download_url": "data/downloads/ahp_fsi.tif"
+  },
+  {
+    "id": "ahp_dsi",
+    "title": "Drought Simple Model",
+    "kind": "raster",
+    "render_mode": "continuous",
+    "source_file": "01_Zenodo/Results/Rasters/AHP_DSI.tif",
+    "groups": [
+      "benchmark_comparison"
+    ],
+    "description": "Simple weighted drought model used to check the XGBoost map.",
+    "units": "Weighted score",
+    "legend_title": "Score",
+    "palette": "drought",
+    "display_range": [
+      1.0,
+      5.0
+    ],
+    "tile_format": "webp",
+    "source_resampling": "bilinear",
+    "download_resampling": "bilinear",
+    "stats": {
+      "min": 1.0,
+      "max": 5.0,
+      "mean": 2.964353,
+      "p2": 1.0,
+      "p50": 3.0047,
+      "p98": 5.0,
+      "display_min": 1.0,
+      "display_max": 5.0
+    },
+    "bounds_4326": [
+      [
+        -55.9875,
+        -92.00096
+      ],
+      [
+        14.880593,
+        -32.370791
+      ]
+    ],
+    "legend_ticks": [
+      1.0,
+      2.0,
+      3.0,
+      4.0,
+      5.0
+    ],
+    "legend_gradient": [
+      "#0b1f8a",
+      "#2f73b3",
+      "#a0bfa0",
+      "#fac25e",
+      "#de4932",
+      "#7f0000"
+    ],
+    "tile_url": "data/layers/ahp_dsi/tiles/{z}/{x}/{y}.webp",
+    "download_url": "data/downloads/ahp_dsi.tif"
+  },
+  {
+    "id": "ahp_fisi",
+    "title": "Wildfire Simple Model",
+    "kind": "raster",
+    "render_mode": "continuous",
+    "source_file": "01_Zenodo/Results/Rasters/AHP_FiSI.tif",
+    "groups": [
+      "benchmark_comparison"
+    ],
+    "description": "Simple weighted wildfire model used to check the XGBoost map.",
+    "units": "Weighted score",
+    "legend_title": "Score",
+    "palette": "wildfire",
+    "display_range": [
+      1.0,
+      5.0
+    ],
+    "tile_format": "webp",
+    "source_resampling": "bilinear",
+    "download_resampling": "bilinear",
+    "stats": {
+      "min": 1.0,
+      "max": 5.0,
+      "mean": 2.709871,
+      "p2": 1.0,
+      "p50": 2.5164,
+      "p98": 4.6729,
+      "display_min": 1.0,
+      "display_max": 5.0
+    },
+    "bounds_4326": [
+      [
+        -55.9875,
+        -92.00096
+      ],
+      [
+        14.880593,
+        -32.370791
+      ]
+    ],
+    "legend_ticks": [
+      1.0,
+      2.0,
+      3.0,
+      4.0,
+      5.0
+    ],
+    "legend_gradient": [
+      "#2d004b",
+      "#542788",
+      "#9e3a8a",
+      "#e55e6b",
+      "#fdae61",
+      "#fff1a8"
+    ],
+    "tile_url": "data/layers/ahp_fisi/tiles/{z}/{x}/{y}.webp",
+    "download_url": "data/downloads/ahp_fisi.tif"
+  },
+  {
+    "id": "rx1day",
+    "title": "Extreme Daily Rainfall",
+    "kind": "raster",
+    "render_mode": "continuous",
+    "source_file": "01_Zenodo/Data/Rasters/Original_Rx1day.tif",
+    "groups": [
+      "flood_predictors"
+    ],
+    "description": "Average yearly value of the wettest 1-day rainfall event. Used as a flood input.",
+    "units": "mm day-1",
+    "legend_title": "mm day-1",
+    "palette": "rain",
+    "display_range": null,
+    "tile_format": "webp",
+    "source_resampling": "bilinear",
+    "download_resampling": "bilinear",
+    "stats": {
+      "min": 0.77018,
+      "max": 640.818604,
+      "mean": 52.632483,
+      "p2": 11.219079,
+      "p50": 52.10043,
+      "p98": 97.586296,
+      "display_min": 11.219079,
+      "display_max": 97.586296
+    },
+    "bounds_4326": [
+      [
+        -56.000975,
+        -92.005451
+      ],
+      [
+        14.885084,
+        -32.357317
+      ]
+    ],
+    "legend_ticks": [
+      11.2191,
+      32.8109,
+      54.4027,
+      75.9945,
+      97.5863
+    ],
+    "legend_gradient": [
+      "#f7fbff",
+      "#cfe1f2",
+      "#8fc0e0",
+      "#51a0cc",
+      "#2481b7",
+      "#08589e"
+    ],
+    "tile_url": "data/layers/rx1day/tiles/{z}/{x}/{y}.webp",
+    "download_url": "data/downloads/rx1day.tif"
+  },
+  {
+    "id": "slope",
+    "title": "Slope",
+    "kind": "raster",
+    "render_mode": "continuous",
+    "source_file": "01_Zenodo/Data/Rasters/Original_slope.tif",
+    "groups": [
+      "flood_predictors",
+      "wildfire_predictors"
+    ],
+    "description": "Steepness of the land surface from the elevation map.",
+    "units": "Degrees",
+    "legend_title": "Degrees",
+    "palette": "slope",
+    "display_range": null,
+    "tile_format": "webp",
+    "source_resampling": "bilinear",
+    "download_resampling": "bilinear",
+    "stats": {
+      "min": 0.0,
+      "max": 55.457523,
+      "mean": 2.274733,
+      "p2": 0.013516,
+      "p50": 0.665923,
+      "p98": 17.205097,
+      "display_min": 0.013516,
+      "display_max": 17.205097
+    },
+    "bounds_4326": [
+      [
+        -56.000975,
+        -92.005451
+      ],
+      [
+        14.885084,
+        -32.357317
+      ]
+    ],
+    "legend_ticks": [
+      0.0135,
+      4.3114,
+      8.6093,
+      12.9072,
+      17.2051
+    ],
+    "legend_gradient": [
+      "#ffffe5",
+      "#f7fcb9",
+      "#d9f0a3",
+      "#addd8e",
+      "#30a354",
+      "#006837"
+    ],
+    "tile_url": "data/layers/slope/tiles/{z}/{x}/{y}.webp",
+    "download_url": "data/downloads/slope.tif"
+  },
+  {
+    "id": "dem",
+    "title": "Elevation",
+    "kind": "raster",
+    "render_mode": "continuous",
+    "source_file": "01_Zenodo/Data/Rasters/Original_DEM.tif",
+    "groups": [
+      "flood_predictors"
+    ],
+    "description": "Land height above sea level.",
+    "units": "m",
+    "legend_title": "m",
+    "palette": "terrain",
+    "display_range": null,
+    "tile_format": "webp",
+    "source_resampling": "bilinear",
+    "download_resampling": "bilinear",
+    "stats": {
+      "min": -107.131744,
+      "max": 6695.436035,
+      "mean": 578.725317,
+      "p2": 6.898455,
+      "p50": 246.720627,
+      "p98": 4083.539854,
+      "display_min": 6.898455,
+      "display_max": 4083.539854
+    },
+    "bounds_4326": [
+      [
+        -56.000975,
+        -92.005451
+      ],
+      [
+        14.885084,
+        -32.357317
+      ]
+    ],
+    "legend_ticks": [
+      6.8985,
+      1026.0588,
+      2045.2192,
+      3064.3795,
+      4083.5399
+    ],
+    "legend_gradient": [
+      "#333399",
+      "#00b2b2",
+      "#99ea84",
+      "#ccbd7d",
+      "#997c76",
+      "#ffffff"
+    ],
+    "tile_url": "data/layers/dem/tiles/{z}/{x}/{y}.webp",
+    "download_url": "data/downloads/dem.tif"
+  },
+  {
+    "id": "dtb",
+    "title": "Depth to Bedrock",
+    "kind": "raster",
+    "render_mode": "continuous",
+    "source_file": "01_Zenodo/Data/Rasters/Original_DTB.tif",
+    "groups": [
+      "flood_predictors"
+    ],
+    "description": "Estimated depth from the ground surface to bedrock.",
+    "units": "m",
+    "legend_title": "m",
+    "palette": "bedrock",
+    "display_range": null,
+    "tile_format": "webp",
+    "source_resampling": "bilinear",
+    "download_resampling": "bilinear",
+    "stats": {
+      "min": 0.0,
+      "max": 50.0,
+      "mean": 6.227055,
+      "p2": 0.0,
+      "p50": 0.0,
+      "p98": 50.0,
+      "display_min": 0.0,
+      "display_max": 50.0
+    },
+    "bounds_4326": [
+      [
+        -55.991992,
+        -92.005451
+      ],
+      [
+        14.885084,
+        -32.3663
+      ]
+    ],
+    "legend_ticks": [
+      0.0,
+      12.5,
+      25.0,
+      37.5,
+      50.0
+    ],
+    "legend_gradient": [
+      "#f7fbff",
+      "#d0d1e6",
+      "#a6bddb",
+      "#74a9cf",
+      "#2b8cbe",
+      "#045a8d"
+    ],
+    "tile_url": "data/layers/dtb/tiles/{z}/{x}/{y}.webp",
+    "download_url": "data/downloads/dtb.tif"
+  },
+  {
+    "id": "distance_to_river",
+    "title": "Distance to Nearest River",
+    "kind": "raster",
+    "render_mode": "continuous",
+    "source_file": "01_Zenodo/Data/Rasters/Original_distanceToRiver.tif",
+    "groups": [
+      "flood_predictors"
+    ],
+    "description": "Distance from each map cell to the nearest mapped river.",
+    "units": "m",
+    "legend_title": "m",
+    "palette": "distance",
+    "display_range": null,
+    "tile_format": "webp",
+    "source_resampling": "bilinear",
+    "download_resampling": "bilinear",
+    "stats": {
+      "min": 9e-06,
+      "max": 49995.548922,
+      "mean": 1117.873107,
+      "p2": 34.137844,
+      "p50": 928.249641,
+      "p98": 3314.635217,
+      "display_min": 34.137844,
+      "display_max": 3314.635217
+    },
+    "bounds_4326": [
+      [
+        -55.991992,
+        -92.005451
+      ],
+      [
+        14.885084,
+        -32.3663
+      ]
+    ],
+    "legend_ticks": [
+      34.1378,
+      854.2622,
+      1674.3865,
+      2494.5109,
+      3314.6352
+    ],
+    "legend_gradient": [
+      "#440154",
+      "#3c4180",
+      "#2b778b",
+      "#39a77b",
+      "#7dcf55",
+      "#fde725"
+    ],
+    "tile_url": "data/layers/distance_to_river/tiles/{z}/{x}/{y}.webp",
+    "download_url": "data/downloads/distance_to_river.tif"
+  },
+  {
+    "id": "soil",
+    "title": "Soil Texture Class",
+    "kind": "raster",
+    "render_mode": "categorical",
+    "source_file": "01_Zenodo/Data/Rasters/Original_SOIL.tif",
+    "groups": [
+      "flood_predictors"
+    ],
+    "description": "Main soil texture class used as a flood model input.",
+    "units": "Category",
+    "legend_title": "Category",
+    "legend_items": [
+      {
+        "value": 1,
+        "label": "Sand",
+        "color": "#f6e8c3"
+      },
+      {
+        "value": 2,
+        "label": "Loamy Sand",
+        "color": "#eed09b"
+      },
+      {
+        "value": 3,
+        "label": "Sandy Loam",
+        "color": "#dda15e"
+      },
+      {
+        "value": 4,
+        "label": "Loam",
+        "color": "#c68c53"
+      },
+      {
+        "value": 5,
+        "label": "Silt",
+        "color": "#b88968"
+      },
+      {
+        "value": 6,
+        "label": "Silt Loam",
+        "color": "#9f7962"
+      },
+      {
+        "value": 7,
+        "label": "Sandy Clay Loam",
+        "color": "#8e6f5c"
+      },
+      {
+        "value": 8,
+        "label": "Clay Loam",
+        "color": "#7d6353"
+      },
+      {
+        "value": 9,
+        "label": "Silty Clay Loam",
+        "color": "#6d574a"
+      },
+      {
+        "value": 10,
+        "label": "Sandy Clay",
+        "color": "#5f4b42"
+      },
+      {
+        "value": 11,
+        "label": "Silty Clay",
+        "color": "#4f3f38"
+      },
+      {
+        "value": 12,
+        "label": "Clay",
+        "color": "#3e302c"
+      }
+    ],
+    "tile_format": "png",
+    "source_resampling": "nearest",
+    "download_resampling": "nearest",
+    "stats": {
+      "min": 0.0,
+      "max": 12.0,
+      "mean": 2.238715,
+      "p2": 0.0,
+      "p50": 0.0,
+      "p98": 9.0,
+      "display_min": 0.0,
+      "display_max": 12.0
+    },
+    "bounds_4326": [
+      [
+        -55.991992,
+        -92.005451
+      ],
+      [
+        14.885084,
+        -32.3663
+      ]
+    ],
+    "tile_url": "data/layers/soil/tiles/{z}/{x}/{y}.png",
+    "download_url": "data/downloads/soil.tif"
+  },
+  {
+    "id": "impervious",
+    "title": "Impervious Surface Fraction",
+    "kind": "raster",
+    "render_mode": "continuous",
+    "source_file": "01_Zenodo/Data/Rasters/Original_imperv.tif",
+    "groups": [
+      "flood_predictors"
+    ],
+    "description": "Share of land covered by hard surfaces such as roads and buildings.",
+    "units": "Fraction",
+    "legend_title": "Fraction",
+    "palette": "impervious",
+    "display_range": [
+      0.0,
+      1.0
+    ],
+    "tile_format": "webp",
+    "source_resampling": "bilinear",
+    "download_resampling": "bilinear",
+    "stats": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.001082,
+      "p2": 0.0,
+      "p50": 0.0,
+      "p98": 0.0,
+      "display_min": 0.0,
+      "display_max": 1.0
+    },
+    "bounds_4326": [
+      [
+        -55.991992,
+        -92.005451
+      ],
+      [
+        14.885084,
+        -32.3663
+      ]
+    ],
+    "legend_ticks": [
+      0.0,
+      0.25,
+      0.5,
+      0.75,
+      1.0
+    ],
+    "legend_gradient": [
+      "#f7f7f7",
+      "#d9d9d9",
+      "#bdbdbd",
+      "#969696",
+      "#636363",
+      "#252525"
+    ],
+    "tile_url": "data/layers/impervious/tiles/{z}/{x}/{y}.webp",
+    "download_url": "data/downloads/impervious.tif"
+  },
+  {
+    "id": "twi",
+    "title": "Topographic Wetness Index",
+    "kind": "raster",
+    "render_mode": "continuous",
+    "source_file": "01_Zenodo/Data/Rasters/Original_TWI.tif",
+    "groups": [
+      "flood_predictors"
+    ],
+    "description": "Terrain wetness score from the elevation map.",
+    "units": "Index",
+    "legend_title": "Index",
+    "palette": "wetness",
+    "display_range": null,
+    "tile_format": "webp",
+    "source_resampling": "bilinear",
+    "download_resampling": "bilinear",
+    "stats": {
+      "min": -0.343988,
+      "max": 20.533764,
+      "mean": 5.064645,
+      "p2": 1.284974,
+      "p50": 4.86104,
+      "p98": 10.725862,
+      "display_min": 1.284974,
+      "display_max": 10.725862
+    },
+    "bounds_4326": [
+      [
+        -56.000975,
+        -92.005451
+      ],
+      [
+        14.885084,
+        -32.357317
+      ]
+    ],
+    "legend_ticks": [
+      1.285,
+      3.6452,
+      6.0054,
+      8.3656,
+      10.7259
+    ],
+    "legend_gradient": [
+      "#f7fcf0",
+      "#c4e8c1",
+      "#96d6bb",
+      "#60bdcd",
+      "#3193c2",
+      "#08589e"
+    ],
+    "tile_url": "data/layers/twi/tiles/{z}/{x}/{y}.webp",
+    "download_url": "data/downloads/twi.tif"
+  },
+  {
+    "id": "avg_rain",
+    "title": "Average Annual Rainfall",
+    "kind": "raster",
+    "render_mode": "continuous",
+    "source_file": "01_Zenodo/Data/Rasters/Original_avgRain.tif",
+    "groups": [
+      "flood_predictors"
+    ],
+    "description": "Average yearly rainfall used as a flood model input.",
+    "units": "mm year-1",
+    "legend_title": "mm year-1",
+    "palette": "rain",
+    "display_range": null,
+    "tile_format": "webp",
+    "source_resampling": "bilinear",
+    "download_resampling": "bilinear",
+    "stats": {
+      "min": 0.0,
+      "max": 628.4375,
+      "mean": 126.019574,
+      "p2": 5.729167,
+      "p50": 124.137497,
+      "p98": 287.991669,
+      "display_min": 5.729167,
+      "display_max": 287.991669
+    },
+    "bounds_4326": [
+      [
+        -56.000975,
+        -92.005451
+      ],
+      [
+        14.885084,
+        -32.357317
+      ]
+    ],
+    "legend_ticks": [
+      5.7292,
+      76.2948,
+      146.8604,
+      217.426,
+      287.9917
+    ],
+    "legend_gradient": [
+      "#f7fbff",
+      "#cfe1f2",
+      "#8fc0e0",
+      "#51a0cc",
+      "#2481b7",
+      "#08589e"
+    ],
+    "tile_url": "data/layers/avg_rain/tiles/{z}/{x}/{y}.webp",
+    "download_url": "data/downloads/avg_rain.tif"
+  },
+  {
+    "id": "avg_sm",
+    "title": "Average Soil Moisture",
+    "kind": "raster",
+    "render_mode": "continuous",
+    "source_file": "01_Zenodo/Data/Rasters/Original_avgSM.tif",
+    "groups": [
+      "flood_predictors",
+      "drought_predictors",
+      "wildfire_predictors"
+    ],
+    "description": "Average soil moisture used by the hazard models.",
+    "units": "m3 m-3",
+    "legend_title": "m3 m-3",
+    "palette": "soil_moisture",
+    "display_range": null,
+    "tile_format": "webp",
+    "source_resampling": "bilinear",
+    "download_resampling": "bilinear",
+    "stats": {
+      "min": 0.0,
+      "max": 6343.070801,
+      "mean": 1062.806708,
+      "p2": 0.545833,
+      "p50": 678.137512,
+      "p98": 3690.0,
+      "display_min": 0.545833,
+      "display_max": 3690.0
+    },
+    "bounds_4326": [
+      [
+        -56.000975,
+        -92.005451
+      ],
+      [
+        14.885084,
+        -32.357317
+      ]
+    ],
+    "legend_ticks": [
+      0.5458,
+      922.9094,
+      1845.2729,
+      2767.6365,
+      3690.0
+    ],
+    "legend_gradient": [
+      "#543005",
+      "#bf812c",
+      "#f6e8c3",
+      "#80cdc1",
+      "#35978f",
+      "#01665e"
+    ],
+    "tile_url": "data/layers/avg_sm/tiles/{z}/{x}/{y}.webp",
+    "download_url": "data/downloads/avg_sm.tif"
+  },
+  {
+    "id": "pet_balance",
+    "title": "Potential Evapotranspiration Balance",
+    "kind": "raster",
+    "render_mode": "continuous",
+    "source_file": "01_Zenodo/Data/Rasters/Original_PET_balance.tif",
+    "groups": [
+      "drought_predictors"
+    ],
+    "description": "Water-demand balance used as a drought model input.",
+    "units": "mm",
+    "legend_title": "mm",
+    "palette": "pet_balance",
+    "display_range": null,
+    "tile_format": "webp",
+    "source_resampling": "bilinear",
+    "download_resampling": "bilinear",
+    "stats": {
+      "min": -1712.852015,
+      "max": 8065.600445,
+      "mean": 882.938725,
+      "p2": -143.581367,
+      "p50": 745.610562,
+      "p98": 2786.28213,
+      "display_min": -143.581367,
+      "display_max": 2786.28213
+    },
+    "bounds_4326": [
+      [
+        -55.991992,
+        -92.005451
+      ],
+      [
+        14.885084,
+        -32.3663
+      ]
+    ],
+    "legend_ticks": [
+      -143.5814,
+      588.8845,
+      1321.3504,
+      2053.8163,
+      2786.2821
+    ],
+    "legend_gradient": [
+      "#3b0f70",
+      "#7b237d",
+      "#bd3c71",
+      "#ea6b69",
+      "#fdb17d",
+      "#fcfdbf"
+    ],
+    "tile_url": "data/layers/pet_balance/tiles/{z}/{x}/{y}.webp",
+    "download_url": "data/downloads/pet_balance.tif"
+  },
+  {
+    "id": "vci",
+    "title": "Vegetation Condition Index",
+    "kind": "raster",
+    "render_mode": "continuous",
+    "source_file": "01_Zenodo/Data/Rasters/Original_VCI.tif",
+    "groups": [
+      "drought_predictors"
+    ],
+    "description": "Vegetation health score. Lower values can point to plant stress.",
+    "units": "Index",
+    "legend_title": "Index",
+    "palette": "vegetation",
+    "display_range": [
+      0.0,
+      1.0
+    ],
+    "tile_format": "webp",
+    "source_resampling": "bilinear",
+    "download_resampling": "bilinear",
+    "stats": {
+      "min": 0.0,
+      "max": 0.955615,
+      "mean": 0.644828,
+      "p2": 0.275564,
+      "p50": 0.683466,
+      "p98": 0.874928,
+      "display_min": 0.0,
+      "display_max": 1.0
+    },
+    "bounds_4326": [
+      [
+        -55.991992,
+        -92.005451
+      ],
+      [
+        14.885084,
+        -32.3663
+      ]
+    ],
+    "legend_ticks": [
+      0.0,
+      0.25,
+      0.5,
+      0.75,
+      1.0
+    ],
+    "legend_gradient": [
+      "#ffffcc",
+      "#ceeba3",
+      "#95d285",
+      "#5bb86a",
+      "#27974e",
+      "#006837"
+    ],
+    "tile_url": "data/layers/vci/tiles/{z}/{x}/{y}.webp",
+    "download_url": "data/downloads/vci.tif"
+  },
+  {
+    "id": "lst_day",
+    "title": "Daytime Land Surface Temperature",
+    "kind": "raster",
+    "render_mode": "continuous",
+    "source_file": "01_Zenodo/Data/Rasters/Original_LST_Day.tif",
+    "groups": [
+      "drought_predictors",
+      "wildfire_predictors"
+    ],
+    "description": "Average daytime land surface temperature used in drought and wildfire models.",
+    "units": "Degrees C",
+    "legend_title": "Degrees C",
+    "palette": "temperature",
+    "display_range": null,
+    "tile_format": "webp",
+    "source_resampling": "bilinear",
+    "download_resampling": "bilinear",
+    "stats": {
+      "min": -24.21,
+      "max": 51.826035,
+      "mean": 27.278379,
+      "p2": 9.201116,
+      "p50": 27.813704,
+      "p98": 36.86048,
+      "display_min": 9.201116,
+      "display_max": 36.86048
+    },
+    "bounds_4326": [
+      [
+        -55.991992,
+        -92.005451
+      ],
+      [
+        14.885084,
+        -32.3663
+      ]
+    ],
+    "legend_ticks": [
+      9.2011,
+      16.116,
+      23.0308,
+      29.9456,
+      36.8605
+    ],
+    "legend_gradient": [
+      "#313695",
+      "#4e80b9",
+      "#aaada4",
+      "#f7874f",
+      "#dc3c2c",
+      "#a50026"
+    ],
+    "tile_url": "data/layers/lst_day/tiles/{z}/{x}/{y}.webp",
+    "download_url": "data/downloads/lst_day.tif"
+  },
+  {
+    "id": "fire_probability",
+    "title": "Average Annual Fire Probability",
+    "kind": "raster",
+    "render_mode": "continuous",
+    "source_file": "01_Zenodo/Data/Rasters/Original_Avg_Annual_Fire_Probability.tif",
+    "groups": [
+      "wildfire_predictors"
+    ],
+    "description": "Average yearly fire probability used in the wildfire model.",
+    "units": "Probability",
+    "legend_title": "Probability",
+    "palette": "fire_probability",
+    "display_range": null,
+    "tile_format": "webp",
+    "source_resampling": "bilinear",
+    "download_resampling": "bilinear",
+    "stats": {
+      "min": 0.047619,
+      "max": 0.952381,
+      "mean": 0.123641,
+      "p2": 0.047619,
+      "p50": 0.095238,
+      "p98": 0.47619,
+      "display_min": 0.047619,
+      "display_max": 0.47619
+    },
+    "bounds_4326": [
+      [
+        -55.991992,
+        -92.005451
+      ],
+      [
+        14.885084,
+        -32.3663
+      ]
+    ],
+    "legend_ticks": [
+      0.0476,
+      0.1548,
+      0.2619,
+      0.369,
+      0.4762
+    ],
+    "legend_gradient": [
+      "#ffffcc",
+      "#ffeda0",
+      "#feb24c",
+      "#f03b20",
+      "#bd0026",
+      "#4d0000"
+    ],
+    "tile_url": "data/layers/fire_probability/tiles/{z}/{x}/{y}.webp",
+    "download_url": "data/downloads/fire_probability.tif"
+  },
+  {
+    "id": "population",
+    "title": "Population Density",
+    "kind": "raster",
+    "render_mode": "continuous",
+    "source_file": "01_Zenodo/Data/Rasters/Original_population.tif",
+    "groups": [
+      "socioeconomic_context"
+    ],
+    "description": "Number of people per area, used in people-at-risk and city scores.",
+    "units": "inh km-2",
+    "legend_title": "inh km-2",
+    "palette": "population",
+    "display_range": null,
+    "tile_format": "webp",
+    "source_resampling": "bilinear",
+    "download_resampling": "bilinear",
+    "stats": {
+      "min": 0.0,
+      "max": 57673.861891,
+      "mean": 24.512077,
+      "p2": 0.0,
+      "p50": 0.543689,
+      "p98": 88.390235,
+      "display_min": 0.0,
+      "display_max": 88.390235
+    },
+    "bounds_4326": [
+      [
+        -55.991992,
+        -92.005451
+      ],
+      [
+        14.885084,
+        -32.3663
+      ]
+    ],
+    "legend_ticks": [
+      0.0,
+      22.0976,
+      44.1951,
+      66.2927,
+      88.3902
+    ],
+    "legend_gradient": [
+      "#fff5f0",
+      "#fcbba1",
+      "#fc9272",
+      "#fb6a4a",
+      "#de2d26",
+      "#a50f15"
+    ],
+    "tile_url": "data/layers/population/tiles/{z}/{x}/{y}.webp",
+    "download_url": "data/downloads/population.tif"
+  },
+  {
+    "id": "hmi",
+    "title": "Human Modification Index",
+    "kind": "raster",
+    "render_mode": "continuous",
+    "source_file": "01_Zenodo/Data/Rasters/Original_HMI.tif",
+    "groups": [
+      "socioeconomic_context"
+    ],
+    "description": "Score for how much people have changed the land surface.",
+    "units": "Index",
+    "legend_title": "Index",
+    "palette": "hmi",
+    "display_range": [
+      0.0,
+      1.0
+    ],
+    "tile_format": "webp",
+    "source_resampling": "bilinear",
+    "download_resampling": "bilinear",
+    "stats": {
+      "min": 0.0,
+      "max": 0.985997,
+      "mean": 0.16784,
+      "p2": 0.000574,
+      "p50": 0.123683,
+      "p98": 0.678041,
+      "display_min": 0.0,
+      "display_max": 1.0
+    },
+    "bounds_4326": [
+      [
+        -55.991992,
+        -92.005451
+      ],
+      [
+        14.885084,
+        -32.3663
+      ]
+    ],
+    "legend_ticks": [
+      0.0,
+      0.25,
+      0.5,
+      0.75,
+      1.0
+    ],
+    "legend_gradient": [
+      "#ffffe5",
+      "#fef3b3",
+      "#fed676",
+      "#feaa38",
+      "#e06a13",
+      "#993404"
+    ],
+    "tile_url": "data/layers/hmi/tiles/{z}/{x}/{y}.webp",
+    "download_url": "data/downloads/hmi.tif"
+  },
+  {
+    "id": "gdp",
+    "title": "GDP Intensity",
+    "kind": "raster",
+    "render_mode": "continuous",
+    "source_file": "01_Zenodo/Data/Rasters/GDP_SA_USD_per_km2.tif",
+    "groups": [
+      "socioeconomic_context"
+    ],
+    "description": "Economic activity score used in the city capacity score.",
+    "units": "USD km-2",
+    "legend_title": "USD km-2",
+    "palette": "gdp",
+    "display_range": null,
+    "tile_format": "webp",
+    "source_resampling": "bilinear",
+    "download_resampling": "bilinear",
+    "stats": {
+      "min": 0.0,
+      "max": 2162273536.0,
+      "mean": 297091.083796,
+      "p2": 0.0,
+      "p50": 0.0,
+      "p98": 494120.7925,
+      "display_min": 0.0,
+      "display_max": 494120.7925
+    },
+    "bounds_4326": [
+      [
+        -55.991992,
+        -92.005451
+      ],
+      [
+        14.885084,
+        -32.3663
+      ]
+    ],
+    "legend_ticks": [
+      0.0,
+      123530.1981,
+      247060.3962,
+      370590.5944,
+      494120.7925
+    ],
+    "legend_gradient": [
+      "#f7fcfd",
+      "#ccece6",
+      "#66c2a4",
+      "#41ae76",
+      "#238b45",
+      "#005824"
+    ],
+    "tile_url": "data/layers/gdp/tiles/{z}/{x}/{y}.webp",
+    "download_url": "data/downloads/gdp.tif"
+  },
+  {
+    "id": "hdi",
+    "title": "Human Development Index",
+    "kind": "raster",
+    "render_mode": "continuous",
+    "source_file": "01_Zenodo/Data/Rasters/HDI_2020.tif",
+    "groups": [
+      "socioeconomic_context"
+    ],
+    "description": "Human development score used in the city capacity score.",
+    "units": "Index",
+    "legend_title": "Index",
+    "palette": "hdi",
+    "display_range": [
+      0.0,
+      1.0
+    ],
+    "tile_format": "webp",
+    "source_resampling": "bilinear",
+    "download_resampling": "bilinear",
+    "stats": {
+      "min": 0.568389,
+      "max": 0.938982,
+      "mean": 0.746729,
+      "p2": 0.664453,
+      "p50": 0.74,
+      "p98": 0.863061,
+      "display_min": 0.0,
+      "display_max": 1.0
+    },
+    "bounds_4326": [
+      [
+        -55.991992,
+        -92.005451
+      ],
+      [
+        14.885084,
+        -32.3663
+      ]
+    ],
+    "legend_ticks": [
+      0.0,
+      0.25,
+      0.5,
+      0.75,
+      1.0
+    ],
+    "legend_gradient": [
+      "#f7fcf5",
+      "#d0ecca",
+      "#95d293",
+      "#59b668",
+      "#27984c",
+      "#006d2c"
+    ],
+    "tile_url": "data/layers/hdi/tiles/{z}/{x}/{y}.webp",
+    "download_url": "data/downloads/hdi.tif"
+  },
+  {
+    "id": "permanent_water",
+    "title": "Permanent Water Occurrence",
+    "kind": "raster",
+    "render_mode": "continuous",
+    "source_file": "01_Zenodo/Data/Rasters/Original_PermanentWater.tif",
+    "groups": [
+      "socioeconomic_context"
+    ],
+    "description": "Mask for permanent water areas. Used to avoid treating standing water as land hazard.",
+    "units": "Fraction",
+    "legend_title": "Fraction",
+    "palette": "water",
+    "display_range": [
+      0.0,
+      1.0
+    ],
+    "tile_format": "webp",
+    "source_resampling": "bilinear",
+    "download_resampling": "bilinear",
+    "stats": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.009315,
+      "p2": 0.0,
+      "p50": 0.0,
+      "p98": 0.0,
+      "display_min": 0.0,
+      "display_max": 1.0
+    },
+    "bounds_4326": [
+      [
+        -55.991992,
+        -92.005451
+      ],
+      [
+        14.885084,
+        -32.3663
+      ]
+    ],
+    "legend_ticks": [
+      0.0,
+      0.25,
+      0.5,
+      0.75,
+      1.0
+    ],
+    "legend_gradient": [
+      "#f7fbff",
+      "#cfe1f2",
+      "#8fc0e0",
+      "#539ccc",
+      "#2878b6",
+      "#08519c"
+    ],
+    "tile_url": "data/layers/permanent_water/tiles/{z}/{x}/{y}.webp",
+    "download_url": "data/downloads/permanent_water.tif"
+  },
+  {
+    "id": "municipal_classes",
+    "title": "City Class Areas",
+    "kind": "vector",
+    "render_mode": "polygon",
+    "groups": [
+      "urban_classification"
+    ],
+    "description": "City-area shapes colored by the four hazard and capacity classes used in the city tool.",
+    "data_key": "municipal_classes",
+    "legend_title": "Legend",
+    "legend_items": [
+      {
+        "label": "High Socio / Low Hazard",
+        "color": "#1f9d55"
+      },
+      {
+        "label": "High Socio / High Hazard",
+        "color": "#f08c1a"
+      },
+      {
+        "label": "Low Socio / Low Hazard",
+        "color": "#2b6cb0"
+      },
+      {
+        "label": "Low Socio / High Hazard",
+        "color": "#d62828"
+      }
+    ],
+    "data_url": "data/cities/municipal_classes.geojson",
+    "download_url": "data/cities/municipal_classes.geojson"
+  },
+  {
+    "id": "city_points",
+    "title": "City Ranking Points",
+    "kind": "vector",
+    "render_mode": "point",
+    "groups": [
+      "urban_classification"
+    ],
+    "description": "City points with hazard, capacity, and priority scores used in the city ranking tool.",
+    "data_key": "city_points",
+    "legend_title": "Legend",
+    "legend_items": [],
+    "data_url": "data/cities/city_points.geojson",
+    "download_url": "data/cities/city_points.geojson"
+  }
+]

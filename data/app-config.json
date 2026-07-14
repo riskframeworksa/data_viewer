@@ -1,0 +1,496 @@
+{
+  "generated_at": "2026-07-13T04:08:06.556953+00:00",
+  "site": {
+    "title": "MIRA",
+    "subtitle": "Multi-hazard Index for Risk Assessment across South America."
+  },
+  "views": [
+    "atlas",
+    "urban",
+    "methods"
+  ],
+  "default_view": "atlas",
+  "default_layer": "xgb_fsi",
+  "groups": [
+    {
+      "id": "hazard_susceptibility",
+      "title": "Hazard Scores"
+    },
+    {
+      "id": "hazard_exposure",
+      "title": "People at Risk"
+    },
+    {
+      "id": "flood_predictors",
+      "title": "Flood Inputs"
+    },
+    {
+      "id": "drought_predictors",
+      "title": "Drought Inputs"
+    },
+    {
+      "id": "wildfire_predictors",
+      "title": "Wildfire Inputs"
+    },
+    {
+      "id": "socioeconomic_context",
+      "title": "People, Economy, and Land"
+    },
+    {
+      "id": "urban_classification",
+      "title": "City Classes"
+    }
+  ],
+  "weights": {
+    "hazard_weight": 0.6,
+    "hazard_components": {
+      "flood": 0.55,
+      "drought": 0.35,
+      "wildfire": 0.1
+    },
+    "adaptive_capacity": {
+      "gdp": 0.4,
+      "hdi": 0.6
+    }
+  },
+  "atlas_handoffs": {
+    "xgb_fsi": {
+      "country": null,
+      "hazard": "Flood",
+      "urban_focus_layer": "xgb_fsi"
+    },
+    "xgb_dsi": {
+      "country": null,
+      "hazard": "Drought",
+      "urban_focus_layer": "xgb_dsi"
+    },
+    "xgb_fisi": {
+      "country": null,
+      "hazard": "Wildfire",
+      "urban_focus_layer": "xgb_fisi"
+    }
+  },
+  "urban_handoffs": {
+    "Flood": "xgb_fsi",
+    "Drought": "xgb_dsi",
+    "Wildfire": "xgb_fisi",
+    "Unavailable": "xgb_fsi"
+  },
+  "reference_layers": {
+    "countries_url": "data/reference/countries.geojson"
+  },
+  "city_meta": {
+    "city_count": 8312,
+    "municipal_count": 8312,
+    "city_raster_values_url": "data/cities/city_raster_values.json",
+    "atlas_country_options": [
+      "Argentina",
+      "Bolivia",
+      "Brazil",
+      "Chile",
+      "Colombia",
+      "Ecuador",
+      "Falkland Islands (Malvinas)",
+      "Guyana",
+      "Paraguay",
+      "Peru",
+      "Suriname",
+      "Uruguay",
+      "Venezuela"
+    ],
+    "urban_country_options": [
+      "Argentina",
+      "Bolivia",
+      "Brazil",
+      "Chile",
+      "Colombia",
+      "Ecuador",
+      "Falkland Islands (Malvinas)",
+      "Guyana",
+      "Paraguay",
+      "Peru",
+      "Suriname",
+      "Uruguay",
+      "Venezuela"
+    ],
+    "states_by_country": {
+      "Argentina": [
+        "Buenos Aires",
+        "Buenos Aires D.f.",
+        "Catamarca",
+        "Chaco",
+        "Chubut",
+        "Cordoba",
+        "Corrientes",
+        "Entre Rios",
+        "Formosa",
+        "Jujuy",
+        "La Pampa",
+        "La Rioja",
+        "Mendoza",
+        "Misiones",
+        "Neuquen",
+        "Rio Negro",
+        "Salta",
+        "San Juan",
+        "San Luis",
+        "Santa Cruz",
+        "Santa Fe",
+        "Santiago Del Estero",
+        "Tierra Del Fuego",
+        "Tucuman"
+      ],
+      "Bolivia": [
+        "Beni",
+        "Chuquisaca",
+        "Cochabamba",
+        "La Paz",
+        "Oruro",
+        "Pando",
+        "Potosi",
+        "Santa Cruz",
+        "Tarija"
+      ],
+      "Brazil": [
+        "Acre",
+        "Alagoas",
+        "Amapa",
+        "Amazonas",
+        "Bahia",
+        "Ceara",
+        "Distrito Federal",
+        "Espirito Santo",
+        "Goias",
+        "Maranhao",
+        "Mato Grosso",
+        "Mato Grosso Do Sul",
+        "Minas Gerais",
+        "Para",
+        "Paraiba",
+        "Parana",
+        "Pernambuco",
+        "Piaui",
+        "Rio De Janeiro",
+        "Rio Grande Do Norte",
+        "Rio Grande Do Sul",
+        "Rondonia",
+        "Roraima",
+        "Santa Catarina",
+        "Sao Paulo",
+        "Sergipe",
+        "Tocantins"
+      ],
+      "Chile": [
+        "Aisen del Gral. Carlos Iba\u00c3\u00b1ez del Campo",
+        "Antofagasta",
+        "Araucania",
+        "Arica y Painacota",
+        "Atacama",
+        "Biobio",
+        "Coquimbo",
+        "Libertador Gral. Bernardo O'Higgins",
+        "Los Lagos",
+        "Los Rios",
+        "Magallanes y Antartica chilena",
+        "Maule",
+        "Metropolitana",
+        "Tarapaca",
+        "Valparaiso"
+      ],
+      "Colombia": [
+        "Amazonas",
+        "Antioquia",
+        "Arauca",
+        "Atlantico",
+        "Bolivar",
+        "Boyaca",
+        "Buenaventura",
+        "Caldas",
+        "Caqueta",
+        "Casanare",
+        "Cauca",
+        "Cesar",
+        "Choco",
+        "Cordoba",
+        "Cundinamarca",
+        "Guainia",
+        "Guajira",
+        "Guaviare",
+        "Huila",
+        "Magdalena",
+        "Meta",
+        "Narino",
+        "Norte De Santander",
+        "Putumayo",
+        "Quindio",
+        "Risaralda",
+        "Santander",
+        "Sucre",
+        "Tolima",
+        "Valle Del Cauca",
+        "Vaupes",
+        "Vichada"
+      ],
+      "Ecuador": [
+        "Azuay",
+        "Bolivar",
+        "Canar",
+        "Carchi",
+        "Chimborazo",
+        "Cotopaxi",
+        "El Oro",
+        "Esmeraldas",
+        "Guayas",
+        "Imbabura",
+        "Loja",
+        "Los Rios",
+        "Manabi",
+        "Morona Santiago",
+        "Napo",
+        "Orellana",
+        "Pastaza",
+        "Pichincha",
+        "Santa Elena",
+        "Santo Domingo de los Tsachilas",
+        "Sucumbios",
+        "Tungurahua",
+        "Zamora Chinchipe",
+        "Zona No Delimitada"
+      ],
+      "Falkland Islands (Malvinas)": [
+        "Administrative unit not available"
+      ],
+      "Guyana": [
+        "Barima Waini (region N\u00c2\u00b01)",
+        "Cuyuni/mazaruni (region N\u00c2\u00b07)",
+        "Demerara Mahaica (region N\u00c2\u00b04)",
+        "East Berbice/corentyne (region N\u00c2\u00b06)",
+        "Essequibo Islands/west Demerara (region N\u00c2\u00b03)",
+        "Mahaica Berbice (region N\u00c2\u00b05)",
+        "Pomeroon/supenaam (region N\u00c2\u00b02",
+        "Potaro/siparuni (region N\u00c2\u00b08)",
+        "Upper Demerara/berbice (region N\u00c2\u00b010)",
+        "Upper Takutu/upper Essequibo (region N\u00c2\u00b09)"
+      ],
+      "Paraguay": [
+        "Alto Paraguay",
+        "Alto Parana",
+        "Amambay",
+        "Boqueron",
+        "Caaguazu",
+        "Caazapa",
+        "Canindeyu",
+        "Central",
+        "Concepcion",
+        "Cordillera",
+        "Guaira",
+        "Itapua",
+        "Misiones",
+        "Neembucu",
+        "Paraguari",
+        "Presidente Hayes",
+        "San Pedro"
+      ],
+      "Peru": [
+        "Amazonas",
+        "Ancash",
+        "Apur\u00c3\u00admac",
+        "Arequipa",
+        "Ayacucho",
+        "Cajamarca",
+        "Callao",
+        "Cusco",
+        "Huancavelica",
+        "Hu\u00c3\u00a1nuco",
+        "Ica",
+        "Jun\u00c3\u00adn",
+        "La Libertad",
+        "Lambayeque",
+        "Lima",
+        "Loreto",
+        "Madre de Dios",
+        "Moquegua",
+        "Pasco",
+        "Piura",
+        "Puno",
+        "San Mart\u00c3\u00adn",
+        "Tacna",
+        "Tumbes",
+        "Ucayali"
+      ],
+      "Suriname": [
+        "Brokopondo",
+        "Commewijne",
+        "Coronie",
+        "Marowijne",
+        "Nickerie",
+        "Para",
+        "Paramaribo",
+        "Saramacca",
+        "Sipaliwini",
+        "Wanica"
+      ],
+      "Uruguay": [
+        "Artigas",
+        "Canelones",
+        "Cerro Largo",
+        "Colonia",
+        "Durazno",
+        "Flores",
+        "Florida",
+        "Lavalleja",
+        "Maldonado",
+        "Montevideo",
+        "Paysandu",
+        "Rio Negro",
+        "Rivera",
+        "Rocha",
+        "Salto",
+        "San Jose",
+        "Soriano",
+        "Tacuarembo",
+        "Treinta Y Tres"
+      ],
+      "Venezuela": [
+        "Amazonas",
+        "Anzoategui",
+        "Apure",
+        "Aragua",
+        "Barinas",
+        "Bolivar",
+        "Carabobo",
+        "Cojedes",
+        "Delta Amacuro",
+        "Distrito Capital",
+        "Falcon",
+        "Guarico",
+        "Lara",
+        "Merida",
+        "Miranda",
+        "Monagas",
+        "Nueva Esparta",
+        "Portuguesa",
+        "Sucre",
+        "Tachira",
+        "Trujillo",
+        "Vargas",
+        "Yaracuy",
+        "Zulia"
+      ]
+    },
+    "country_bounds": {
+      "Argentina": [
+        -73.4154,
+        -55.25,
+        -53.6283,
+        -21.8323
+      ],
+      "Chile": [
+        -75.6444,
+        -55.6118,
+        -66.9599,
+        -17.58
+      ],
+      "Falkland Islands (Malvinas)": [
+        -61.2,
+        -52.3,
+        -57.75,
+        -51.1
+      ],
+      "Uruguay": [
+        -58.4271,
+        -34.9526,
+        -53.2096,
+        -30.1097
+      ],
+      "Brazil": [
+        -73.9872,
+        -33.7684,
+        -34.73,
+        5.2445
+      ],
+      "Bolivia": [
+        -69.5904,
+        -22.8729,
+        -57.4984,
+        -9.762
+      ],
+      "Peru": [
+        -81.4109,
+        -18.348,
+        -68.6651,
+        -0.0572
+      ],
+      "Colombia": [
+        -78.9909,
+        -4.2982,
+        -66.8763,
+        12.4373
+      ],
+      "Venezuela": [
+        -73.305,
+        0.7245,
+        -59.7583,
+        12.1623
+      ],
+      "Guyana": [
+        -61.4103,
+        1.2681,
+        -56.5394,
+        8.367
+      ],
+      "Suriname": [
+        -58.0447,
+        1.8177,
+        -53.958,
+        6.0253
+      ],
+      "Ecuador": [
+        -80.9678,
+        -4.9591,
+        -75.2337,
+        1.3809
+      ],
+      "Paraguay": [
+        -62.6851,
+        -27.5485,
+        -54.293,
+        -19.3427
+      ]
+    }
+  },
+  "benchmark_hazards": [
+    "Flood",
+    "Drought",
+    "Wildfire"
+  ],
+  "layer_ids": [
+    "xgb_fsi",
+    "xgb_dsi",
+    "xgb_fisi",
+    "xgb_frei",
+    "xgb_drei",
+    "xgb_firei",
+    "rx1day",
+    "slope",
+    "dem",
+    "dtb",
+    "distance_to_river",
+    "soil",
+    "impervious",
+    "twi",
+    "avg_rain",
+    "avg_sm",
+    "pet_balance",
+    "vci",
+    "lst_day",
+    "fire_probability",
+    "population",
+    "hmi",
+    "gdp",
+    "hdi",
+    "permanent_water",
+    "municipal_classes",
+    "city_points"
+  ]
+}

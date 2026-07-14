@@ -1,0 +1,195 @@
+{
+  "generated_at": "2026-07-13T02:40:55.321807+00:00",
+  "hazards": [
+    {
+      "hazard": "Flood",
+      "predictor_count": 10,
+      "predictors_used": [
+        "rx1day",
+        "slope",
+        "dem",
+        "dtb",
+        "distance_to_river",
+        "soil",
+        "impervious",
+        "twi",
+        "avg_rain",
+        "avg_sm"
+      ],
+      "top_3_predictors": [
+        "twi",
+        "dtb",
+        "distance_to_river"
+      ],
+      "eligible_positive_candidates": 2694460,
+      "eligible_negative_candidates": 15974535,
+      "sample_total_after_dropna": 5387593,
+      "sample_positives_after_dropna": 2693754,
+      "sample_negatives_after_dropna": 2693839,
+      "train_n": 3771315,
+      "validation_n": 808139,
+      "test_n": 808139,
+      "xgb_threshold": 0.464526,
+      "xgb_roc_auc": 0.9321,
+      "wlc_roc_auc": 0.6548,
+      "delta_roc_auc": 0.2773,
+      "xgb_pr_auc": 0.9318,
+      "wlc_pr_auc": 0.6229,
+      "delta_pr_auc": 0.3089,
+      "xgb_f1": 0.859,
+      "wlc_f1": 0.6917,
+      "delta_f1": 0.1673,
+      "xgb_balanced_accuracy": 0.8547,
+      "wlc_balanced_accuracy": 0.5773,
+      "delta_balanced_accuracy": 0.2774,
+      "performance_figure": "assets/benchmarks/flood_xgboost_performance.png",
+      "map_figure": "assets/benchmarks/flood_xgboost_map_comparison.png",
+      "feature_importance": [
+        {
+          "feature": "twi",
+          "importance_gain": 0.356126
+        },
+        {
+          "feature": "dtb",
+          "importance_gain": 0.242078
+        },
+        {
+          "feature": "distance_to_river",
+          "importance_gain": 0.048877
+        },
+        {
+          "feature": "soil_8",
+          "importance_gain": 0.04595
+        },
+        {
+          "feature": "slope",
+          "importance_gain": 0.037756
+        },
+        {
+          "feature": "dem",
+          "importance_gain": 0.037159
+        },
+        {
+          "feature": "soil_5",
+          "importance_gain": 0.0342
+        },
+        {
+          "feature": "soil_6",
+          "importance_gain": 0.032617
+        }
+      ]
+    },
+    {
+      "hazard": "Drought",
+      "predictor_count": 4,
+      "predictors_used": [
+        "pet_balance",
+        "vci",
+        "lst_day",
+        "avg_sm"
+      ],
+      "top_3_predictors": [
+        "lst_day",
+        "pet_balance",
+        "avg_sm"
+      ],
+      "eligible_positive_candidates": 18515749,
+      "eligible_negative_candidates": 4999067,
+      "sample_total_after_dropna": 9845109,
+      "sample_positives_after_dropna": 4900394,
+      "sample_negatives_after_dropna": 4944715,
+      "train_n": 6891576,
+      "validation_n": 1476766,
+      "test_n": 1476767,
+      "xgb_threshold": 0.425405,
+      "xgb_roc_auc": 0.8873,
+      "wlc_roc_auc": 0.587,
+      "delta_roc_auc": 0.3003,
+      "xgb_pr_auc": 0.8908,
+      "wlc_pr_auc": 0.5768,
+      "delta_pr_auc": 0.314,
+      "xgb_f1": 0.8055,
+      "wlc_f1": 0.6647,
+      "delta_f1": 0.1409,
+      "xgb_balanced_accuracy": 0.7953,
+      "wlc_balanced_accuracy": 0.5,
+      "delta_balanced_accuracy": 0.2953,
+      "performance_figure": "assets/benchmarks/drought_xgboost_performance.png",
+      "map_figure": "assets/benchmarks/drought_xgboost_map_comparison.png",
+      "feature_importance": [
+        {
+          "feature": "lst_day",
+          "importance_gain": 0.341144
+        },
+        {
+          "feature": "pet_balance",
+          "importance_gain": 0.271344
+        },
+        {
+          "feature": "avg_sm",
+          "importance_gain": 0.258935
+        },
+        {
+          "feature": "vci",
+          "importance_gain": 0.128577
+        }
+      ]
+    },
+    {
+      "hazard": "Wildfire",
+      "predictor_count": 4,
+      "predictors_used": [
+        "slope",
+        "fire_probability",
+        "avg_sm",
+        "lst_day"
+      ],
+      "top_3_predictors": [
+        "fire_probability",
+        "lst_day",
+        "avg_sm"
+      ],
+      "eligible_positive_candidates": 3400450,
+      "eligible_negative_candidates": 20114544,
+      "sample_total_after_dropna": 6791594,
+      "sample_positives_after_dropna": 3399772,
+      "sample_negatives_after_dropna": 3391822,
+      "train_n": 4754115,
+      "validation_n": 1018739,
+      "test_n": 1018740,
+      "xgb_threshold": 0.411076,
+      "xgb_roc_auc": 0.9242,
+      "wlc_roc_auc": 0.7352,
+      "delta_roc_auc": 0.1889,
+      "xgb_pr_auc": 0.9347,
+      "wlc_pr_auc": 0.7117,
+      "delta_pr_auc": 0.223,
+      "xgb_f1": 0.8369,
+      "wlc_f1": 0.7238,
+      "delta_f1": 0.1131,
+      "xgb_balanced_accuracy": 0.8274,
+      "wlc_balanced_accuracy": 0.7024,
+      "delta_balanced_accuracy": 0.125,
+      "performance_figure": "assets/benchmarks/fire_xgboost_performance.png",
+      "map_figure": "assets/benchmarks/fire_xgboost_map_comparison.png",
+      "feature_importance": [
+        {
+          "feature": "fire_probability",
+          "importance_gain": 0.868123
+        },
+        {
+          "feature": "lst_day",
+          "importance_gain": 0.068882
+        },
+        {
+          "feature": "avg_sm",
+          "importance_gain": 0.032416
+        },
+        {
+          "feature": "slope",
+          "importance_gain": 0.030579
+        }
+      ]
+    }
+  ]
+}
